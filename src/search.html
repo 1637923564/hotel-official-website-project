@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>开元酒店官方网站</title>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Kf9l74ujZL7tSpSG9K0XwrAXwi8zhgXq"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+  <script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+</head>
+
+<body>
+  <div class="search">
+    <div class="p-head"></div>
+    <div class="p-content">
+      <!-- 搜索栏 -->
+      <div class="search-bg">
+        <div class="search-wrap">
+          <input type="text" placeholder="请选择城市" class="cities">
+          <!--
+          --><input type="text" placeholder="请选择入住日期" autocomplete="off" id="from-date">
+          <!--
+          --><input type="text" placeholder="请输入结房日期" id="to-date">
+          <!--
+          --><input type="text" autocomplete="off" placeholder="输入关键字" class="keyword">
+          <!--
+          --><a href="javascript:">搜索</a>
+          <span class="iconfont icon-sousuo"></span>
+          <span class="iconfont icon-sousuo"></span>
+          <span class="iconfont icon-content_reco"></span>
+          <span class="iconfont icon-content_reco"></span>
+        </div>
+      </div>
+      <!-- 历史导航栏 -->
+      <div style="margin: 0;margin: 0 auto;" class="history-nav">
+        <a href="/">首页</a>
+        >
+        <a href="javascript:">杭州市</a>
+      </div>
+      <!-- 选择栏 -->
+      <form class="my-form am-form" data-am-validator>
+        <table class="hotel-select">
+          <tbody>
+            <tr>
+              <td>商圈</td>
+              <td>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="comDis" value="区政府" data-am-ucheck> 区政府
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="comDis" value="万象城" data-am-ucheck> 万象城
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="comDis" value="城北" data-am-ucheck> 城北
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="comDis" value="行政商贸中心" data-am-ucheck> 行政商贸中心
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>行政区</td>
+              <td>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="district" value="萧山区" data-am-ucheck> 萧山区
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="district" value="下城区" data-am-ucheck> 下城区
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="district" value="千岛湖" data-am-ucheck> 千岛湖
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>品牌</td>
+              <td>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="brandSel" value="开元名都" data-am-ucheck> 开元名都
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="brandSel" value="开元大酒店" data-am-ucheck> 开元大酒店
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="brandSel" value="开元观堂" data-am-ucheck> 开元观堂
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>设施</td>
+              <td>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="wifi" data-am-ucheck> wifi
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="停车场" data-am-ucheck> 停车场
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="游泳池" data-am-ucheck> 游泳池
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="热水" data-am-ucheck> 热水
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="儿童乐园" data-am-ucheck> 儿童乐园
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="自行车租赁" data-am-ucheck> 自行车租赁
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="送餐服务" data-am-ucheck> 送餐服务
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="饮料" data-am-ucheck> 饮料
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="商务中心" data-am-ucheck> 商务中心
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="商务中心" data-am-ucheck> 行政酒廊
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="外币兑换" data-am-ucheck> 外币兑换
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="婴儿看护" data-am-ucheck> 婴儿看护
+                </label>
+                <label class="am-checkbox am-warning">
+                  <input type="checkbox" name="facilities" value="游泳池" data-am-ucheck> 游泳池
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+      <!-- 酒店列表 -->
+      <div class="hotel-list">
+        <div class="sort">
+          <div class="lf click-style">默认</div>
+          <div class="rg">评分</div>
+        </div>
+        <!-- 某酒店的基础信息 -->
+        <ul class="hotel">
+          <li>
+            <a href="javaScript:">
+              <img class="showMapClick" src="http://upload.shands.cn/gw/XGW/1902031436273451-536-536.jpg" address="浙江省杭州市萧山区市心中路818号" tit="杭州开元名都大酒店">
+            </a>
+            <div class="basic-infor">
+              <div class="title">杭州开元名都大酒店</div>
+              <div class="quality">
+                <span>2005-01-18&nbsp;</span>
+                <span>五星级</span>|<span>豪华型</span>
+              </div>
+              <div class="address">浙江省杭州市萧山区市心中路818号</div>
+              <!-- 图标 -->
+              <div class="facility">
+                <span class="iconfont icon-wifi"></span>
+                <span class="iconfont icon-tingchechang"></span>
+                <span class="iconfont icon-youyongchi"></span>
+                <span class="iconfont icon-reshuiqi"></span>
+                <span class="iconfont icon-zixingche"></span>
+                <span class="iconfont icon-songcan"></span>
+                <span class="iconfont icon-xingzhengjiulang"></span>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <div class="remark">
+                <b>3297条评论</b>
+                <span>4.9</span>
+              </div>
+              <a href="#" class="btn">立即预定</a>
+            </div>
+          </li>
+
+          <li>
+            <a href="javaScript:">
+              <img class="showMapClick" src="http://upload.shands.cn/gw/XGW/1901151544162032-536-536.jpg" address="四川省安岳县安岳实验中学" tit="夜思她大酒店">
+            </a>
+            <div class="basic-infor">
+              <div class="title">杭州开元名都大酒店</div>
+              <div class="quality">
+                <span>2005-01-18&nbsp;</span>
+                <span>五星级</span>|<span>豪华型</span>
+              </div>
+              <div class="address">浙江省杭州市萧山区市心中路818号</div>
+              <!-- 图标 -->
+              <div class="facility">
+                <span class="iconfont icon-wifi"></span>
+                <span class="iconfont icon-tingchechang"></span>
+                <span class="iconfont icon-youyongchi"></span>
+                <span class="iconfont icon-reshuiqi"></span>
+                <span class="iconfont icon-zixingche"></span>
+                <span class="iconfont icon-songcan"></span>
+                <span class="iconfont icon-xingzhengjiulang"></span>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <div class="remark">
+                <b>3297条评论</b>
+                <span>4.9</span>
+              </div>
+              <a href="#" class="btn">立即预定</a>
+            </div>
+          </li>
+        </ul>
+        <!-- 广告栏 -->
+        <div class="adver">
+          <a href="#"></a>
+        </div>
+        <!-- 地图展示 -->
+        <div id="layerMapWrap" style="width: 100%;height: 100%;"></div>
+      </div>
+    </div>
+    <div class="p-foot"></div>
+  </div>
+</body>
+
+</html>

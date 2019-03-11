@@ -1,0 +1,472 @@
+$golden: rgb(231, 208, 115);
+$lightBlack: rgb(26, 26, 26);
+$lightGray: rgb(245, 245, 245);
+$lightGray2: rgb(232, 232, 232);
+$skyBlue: #77c4e6;
+$iconColor: rgb(254, 129, 9);
+html {
+  height: 100%;
+  body {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    height: auto;
+    font-family: "PingFangSC-Regular";
+    font-size: 14px;
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
+a {
+  color: #000;
+  text-decoration: none;
+}
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+input {
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.p-head {
+  position: fixed;
+  top: 0;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  height: 68px;
+  width: 100%;
+  background-color: rgb(26,26,26);
+  line-height: 68px;
+  z-index: 10000;
+  .nav-wrap {
+    height: 100%;
+    padding: 12px 0;
+    width: 1180px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .logo {
+    float: left;
+    width: 111px;
+    height: 40px;
+    background: url(../image/logo1.png);
+    background-size: 100%;
+  }
+  .nav-list {
+    position: relative;
+    top: -12px;
+    float: right;
+
+    li {
+      float: left;
+      margin-right: 28px;
+      &:last-child {
+        margin-right: 0;
+        .user-menu {
+          a {
+            background: url(../image/down-arrow.png) no-repeat 35px -1px;
+            background-size: 40%;
+            padding-right: 29px;
+            &:hover {
+              background: url(../image/up-arrow.png) no-repeat 35px -1px;
+              background-size: 40%;
+            }
+          }
+        }
+      }
+      a {
+        color: #fff;
+      }
+    }
+    .contact {
+      .phone {
+        position: absolute;
+        top: 85%;
+        background-color: #fff;
+        box-sizing: border-box;
+        box-shadow: 1px 1px 10px rgba($color: #000000, $alpha: .1);
+        line-height: 26px;
+        border-radius: 4px;
+        display: none;
+        div.triangle {
+          position: absolute;
+          border: 8px solid transparent;
+          border-bottom-color: #fff;
+          top: -16px;
+          right: 92px;
+        }
+      }
+      .phone-number {
+        left: 51%;
+        padding: 12px 29px;
+        height: 73px;
+        width: 200px;
+      }
+      .qr-code {
+        left: 57%;
+        height: auto;
+        width: auto;
+        padding: 24px;
+        padding-bottom: 13px;
+        text-align: center;
+        color: $golden;
+        font-weight: 600;
+        img {
+          height: 142px;
+          width: 142px;
+        }
+      }
+    }
+  }
+}
+.p-content {
+  // 历史记录导航栏
+  .history-nav {
+    width: 1182px;
+    height: 45px;
+    margin: 0 auto;
+    margin-top: 66px;
+    line-height: 45px;
+  }
+  // 搜索栏
+  .search-wrap {
+    position: absolute;
+    width: 1132px;
+    height: 48px;
+    box-sizing: border-box;
+    margin-left: 50%;
+    left: -566px;
+    z-index: 2000;
+    input {
+      height: 100%;
+      box-sizing: border-box;
+      border: 1px #ccc solid;
+      padding-left: 32px;
+      font-size: 16px;
+      &.cities {
+        width: 330px;
+        border-radius: 3px;
+        margin-right: 14px;
+      }
+      &#from-date {
+        width: 220px;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        border-right-color: transparent;
+      }
+      &#to-date {
+        width: 220px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        border-left-color: transparent;
+        margin-right: 14px;
+      }
+      &.keyword {
+        width: 220px;
+        border-radius: 3px;
+      }
+    }
+    &>a {
+      float: right;
+      width: 101px;
+      height: 47px;
+      background: $lightBlack;
+      color: #fff;
+      border-color: $lightBlack;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 0;
+      text-align: center;
+      line-height: 47px;
+    }
+    &>span {
+      position: absolute;
+      color: rgb(192, 196, 204);
+      font-size: 14px;
+      &:nth-child(6) {
+        top: 15px;
+        left: 10px;
+      }
+      &:nth-child(7) {
+        top: 15px;
+        left: 808px;
+      }
+      &:nth-child(8) {
+        top: 15px;
+        left: 354px;
+      }
+      &:nth-child(9) {
+        top: 15px;
+        left: 574px;
+      }
+    }
+  }
+  // 活动列表的公共样式
+  .activities-list-wrap {
+    h1 {
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      width: 1181px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content:  space-between;
+      li {
+        width: 382px;
+        height: 100%;
+        margin-bottom: 22px;
+        cursor: pointer;
+        img {
+          display: block;
+          width: 100%;
+          height: 382px;
+        }
+        .text {
+          position: relative;
+          height: 198px;
+          border: 1px solid #e6e6e6;
+          border-top-color: transparent;
+          padding: 12px;
+          font-size: 16px;
+          h1 {
+            font-size: 20px;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+          }
+          p {
+            position: absolute;
+            color: gray;
+            width: 357px;
+            top: 70px;
+          }
+          .btn-wrap {
+            position: absolute;
+            bottom: 26px;
+            width: 357px;
+            height: 42px;
+            line-height: 42px;
+            span {
+              color: gray;
+              font-size: 16px;
+            }
+            .btn {
+              float: right;
+              width: 116px;
+              height: 100%;
+              box-sizing: border-box;
+              color: $golden;
+              border: 1px solid $golden;
+              line-height: 42px;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+    .see-more {
+      margin-top: 67px;
+      text-align: center;
+      font-size: 16px;
+      text-decoration: underline;
+    }
+  }
+  .hotel-list {
+    position: relative;
+    width: 1182px;
+    margin: 0 auto;
+    &>.title {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 60px 0 40px;
+      text-align: center;
+    }
+    .hotel {
+      display: inline-block;
+      width: 794px;
+      li {
+        display: flex;
+        margin-bottom: 20px;
+        height: 272px;
+        box-sizing: border-box;
+        border: 1px solid $lightGray2;
+        &>a {
+          display: inline-block;
+          height: 272px;
+          width: 272px;
+          img {
+            width: 270px;
+            height: 270px;
+          }
+        }
+        .basic-infor {
+          position: relative;
+          box-sizing: border-box;
+          padding: 16px 23px;
+          width: 349px;
+          height: 270px;
+          border-right: 1px solid $lightGray2;
+          .title {
+            font-size: 20px;
+            margin-bottom: 7px;
+          }
+          .quality {
+            color: $skyBlue;
+          }
+          .address {
+            margin-top: 7px;
+            color: gray;
+            font-size: 16px;
+          }
+          .facility {
+            position: absolute;
+            color: $iconColor;
+            bottom: 16px;
+            .iconfont {
+              font-size: 27px;
+              margin-right: 12px;
+            }
+          }
+        }
+        .btn-wrap {
+          position: relative;
+          width: 173px;
+          box-sizing: border-box;
+          padding: 9px 18px;
+          .remark {
+            b {
+              color: #b3b3b3;
+            }
+            span {
+              position: absolute;
+              display: inline-block;
+              box-sizing: border-box;
+              right: 18px;
+              width: 54px;
+              height: 42px;
+              padding-left: 18px;
+              color: #fff;
+              background: url(../image/grade.png) no-repeat;
+              background-size: 100%;
+              font-size: 18px;
+              line-height: 42px;
+            }
+          }
+          &>.btn {
+            position: absolute;
+            display: inline-block;
+            bottom: 14px;
+            width: 138px;
+            height: 46px;
+            box-sizing: border-box;
+            border: solid 1px;
+            text-align: center;
+            line-height: 46px;
+          }
+        }
+      }
+    }
+    .adver {
+      float: right;
+      width: 350px;
+      height: 202px;
+      a {
+        display: inline-block;
+        width: 325px;
+        height: 100%;
+        background: url("http://upload.shands.cn/gw/XGW/1902211357175524-760-760.JPG");
+        background-size: 100%;
+      }
+    }
+  }
+}
+.p-foot {
+  height: 328px;
+  padding-top: 40px;
+  .options {
+    height: 288px;
+    width: 1182px;
+    margin: 0 auto;
+    table {
+      td, th {
+        width: 188px;
+        text-align: left;
+      }
+      th {
+        font-size: 18px;
+        height: 50px;
+      }
+      td {
+        height: 26px;
+      }
+    }
+  }
+  .altar-bar {
+    height: 40px;
+    background-color: #000;
+    color: #fff;
+    font-size: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+    .altar-bar-wrap {
+      width: 1182px;
+      margin: 0 auto;
+      .lf {
+        float: left;
+      }
+      .rg {
+        margin-top: -4px;
+        float: right;
+        .icon {
+          position: relative;
+          top: 5px;
+          width: 22px;
+          height: 22px;
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+}
+#ui-datepicker-div {
+  border: transparent !important;
+  box-shadow: 1px 1px 6px rgba($color: #000000, $alpha: 0.1);
+  width: auto !important;
+  height: auto !important;
+  td {
+    height: 35px !important;
+    a, span {
+      height: 40px !important;
+      width: 35px !important;
+      border: transparent !important;
+      text-align: center !important;
+      &:hover {
+        color: rgb(64, 158, 255) !important; 
+      }
+    }
+  }
+  .ui-datepicker-header {
+    background: #fff !important;
+  }
+  .ui-state-default {
+    background: #fff !important;
+  }
+  .ui-datepicker-unselectable {
+    cursor: no-drop !important;
+  }
+}

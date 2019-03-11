@@ -1,0 +1,439 @@
+$lightBlack: rgb(26, 26, 26);
+$lightGray: rgb(245, 245, 245);
+$lightGray2: rgb(232, 232, 232);
+$golden: rgb(231, 208, 115);
+$skyBlue: #77c4e6;
+$iconColor: rgb(254, 129, 9);
+.home {
+  .p-head {
+    &.rolling-trigger {
+      background-color: transparent;
+      height: 116px;
+      line-height: 116px;
+      .logo {
+        &.rolling-trigger {
+          height: 85px;
+          background: url(../image/logo2.png);
+          background-size: 100%;
+        }
+      }
+    }
+  }
+  .p-content {
+    height: 100%;
+    // 广告栏
+    .carousel {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      min-width: 1132px;
+      height: 912px;
+      overflow: hidden;
+      ul {
+        position: absolute;
+        display: flex;
+        width: 400%;
+        li {
+          img {
+            display: block;
+            width: 100%;
+            max-width: 1920px;
+          }
+        }
+      }
+      .btn {
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        width: 108px;
+        height: 2px;
+        z-index: 1000;
+        bottom: 29px;
+        left: 50%;
+        margin-left: -58px;
+        div {
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+          span {
+            display: inline-block;
+            box-sizing: border-box;
+            border: transparent solid 1px;
+            width: 30px;
+            height: 2px;
+            background-color: rgba($color: #fff, $alpha: 0.3);
+          }
+        }
+        .click-bg {
+          span {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+    // 搜索栏
+    .search-wrap {
+      top: 816px;
+    }
+    // 内容框
+    .introduction {
+      margin-top: 914px;
+      height: 400px;
+      .text-wrap {
+        width: 1152px;
+        height: 100%;
+        margin: 0 auto;
+        padding: 80px 0;
+        box-sizing: border-box;
+        font-size: 18px;
+        h1 {
+          margin-top: 0;
+          margin-bottom: 30px;
+        }
+        .info {
+          line-height: 36px;
+          margin-bottom: 42px;
+        }
+        .btn {
+          display: inline-block;
+          width: 282px;
+          height: 70px;
+          box-sizing: border-box;
+          border: $lightBlack solid 1px;
+          line-height: 70px;
+          text-align: center;
+          cursor: pointer;
+        }
+      }
+    }
+    // 盟友列表
+    .ally {
+      position: relative;
+      height: 436px;
+      background-color: $lightGray;
+      .text-wrap {
+        position: relative;
+        width: 1172px;
+        height: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+        padding: 80px 0;
+        .imgs {
+          float: left;
+          width: 875px;
+          ul {
+            display: flex;
+            justify-content: space-around;
+            &:first-child {
+              margin-bottom: 17px;
+            }
+            li {
+              width: 137px;
+              height: 137px;
+              a {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                &:hover {
+                  background: #fff;
+                }
+                img {
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+            }
+          }
+        }
+        a.title {
+          position: absolute;
+          right: 0;
+          display: inline-block;
+          margin-top: 22px;
+          width: 42px;
+          height: 204px;
+          font-size: 28px;
+          color: $golden;
+        }
+      }
+    }
+    .activities-list-wrap {
+      box-sizing: border-box;
+      padding-top: 82px;
+      height: 948px;
+      ul {
+        margin-top: 81px;
+        height: 580px;
+        li {
+          margin-bottom: 0;
+        }
+      }
+    }
+    .bottom-menu {
+      background-color: rgb(245, 245, 245);
+      height: 72px;
+      .menu-wrap {
+        display: flex;
+        width: 1182px;
+        height: 100%;
+        margin: 0 auto;
+        justify-content: space-between;
+        &>div {
+          position: relative;
+          width: 270px;
+          &>a {
+            display: inline-block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+          }
+          img {
+            display: inline-block;
+            margin-top: 13px;
+            border-radius: 50%;
+          }
+          div {
+            position: absolute;
+            left: 58px;
+            top: 17px;
+            color: #595959;
+            span {
+              color: black;
+              font-size:16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.list {
+  .ally-select {
+    position: relative;
+    height: 914px;
+    margin-bottom: 34px;
+    img {
+      height: 100%;
+    }
+    .select-list {
+      position: absolute;
+      height: 180px;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(255, 255, 255, .7);
+      .swiper-container {
+        width: 100%;
+        height: 180px;
+        .swiper-wrapper {
+          padding: 0 110px !important;
+          .swiper-slide {
+            a {
+              display: inline-block;
+              width: 130px;
+              height: 130px;
+              margin-top: 24px;
+              border-radius: 5px;
+              &.click-style {
+                background-color: #fff;
+              }
+              img {
+                width: 130px;
+                height: 130px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .ally-intro {
+    width: 1182px;
+    height: 460px;
+    margin: 0 auto;
+    background: url(http://upload.shands.cn/gw/XGW/1901041521263499-490-460.jpg) no-repeat 0;
+    background-color: $lightGray;
+    background-size: 50% 100%;
+    padding-left: 651px;
+    padding-top: 43px;
+    box-sizing: border-box;
+    h2 {
+      font-size: 22px;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+    }
+    div {
+      margin-top: 7px;
+      font-size: 16px;
+    }
+    p {
+      margin-top: 29px;
+      margin-bottom: 38px;
+      padding: 0 21px;
+      padding-top: 42px;
+      box-sizing: border-box;
+      background-color: #fff;
+      height: 185px;
+      width: 493px;
+      line-height: 25px;
+    }
+    a {
+      display: inline-block;
+      background-color: $lightBlack;
+      width: 351px;
+      height: 52px;
+      color: #fff;
+      text-align: center;
+      line-height: 52px;
+    }
+  }
+}
+.activities {
+  .recommend {
+    width: 1182px;
+    height: 502px;
+    margin: 0 auto;
+    background: url("http://upload.shands.cn/gw/XGW/1902211357175524-760-760.JPG") no-repeat;
+    background-size: 42% 100%;
+    background-color: $lightGray;
+    padding: 44px 79px 0 563px;
+    box-sizing: border-box;
+    padding-bottom: 43px;
+    h1 {
+      padding: 0;
+      margin: 0;
+      margin-bottom: 56px;
+      font-size: 22px;
+    }
+    p {
+      color: #b3b3b3;
+      font-size: 16px;
+      padding: 0;
+      margin: 0;
+      line-height: 25px;
+    }
+    a {
+      display: inline-block;
+      width: 350px;
+      height: 51px;
+      background-color: $lightBlack;
+      margin-top: 149px;
+      color: #fff;
+      text-align: center;
+      line-height: 51px;
+    }
+  }
+  .activities-list-wrap {
+    ul {
+      margin-top: 42px !important;
+    }
+  }
+}
+.to-join {
+  .p-content {
+    .join-intro-list {
+      width: 1182px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      height: 1100px;
+      border: 1px solid #eee;
+      padding: 0 50px;
+      h1 {
+        font-size: 18px;
+        margin: 29px 0;
+      }
+      .join-intro-list-wrap {
+        height: 100%;
+        border-top: dashed 1px #ddd;
+        ul {
+          li {
+            display: inline-block;
+            margin-right: 40px;
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+            &.title {
+              display: block;
+              height: 24px;
+              margin: 42px 0;
+              cursor: auto;
+              font-size: 18px;
+            }
+            img {
+              width: 120px;
+              height: 120px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.search {
+  .search-wrap {
+    &>input {
+      margin-left: -3px;
+    }
+  }
+  .search-bg {
+    height: 169px;
+    background-color: $lightGray;
+    box-sizing: border-box;
+    padding-top: 94px;
+  }
+  .hotel-select {
+    width: 1182px;
+    margin: 0 auto;
+    border: 1px solid #E6E6E6;
+    tr {
+      border-bottom: 1px solid #E6E6E6;
+      &:last-child {
+        border: 0;
+      }
+      td {
+        &:first-child {
+          background-color: #F0F0F0;
+          width: 132px;
+          text-align: center;
+        }
+        &:last-child {
+          padding-left: 24px;
+          padding-right: 46px;
+          padding-top: 12px;
+          label {
+            margin: 0;
+            margin-bottom: 12px;
+            display: inline-block;
+            margin-right: 16px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .hotel-list {
+    .sort {
+      background-color: #F0F0F0;
+      margin: 0 auto;
+      margin: 20px 0;
+      width: 1182px;
+      height: 47px;
+      border: 1px solid #E6E6E6;
+      div {
+        display: inline-block;
+        line-height: 47px;
+        height: 45px;
+        text-align: center;
+        width: 83px;
+        cursor: pointer;
+      }
+      .click-style {
+        background-color: #fff;
+        color: #E6CD6A;
+      }
+    }
+  }
+}

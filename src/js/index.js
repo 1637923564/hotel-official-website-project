@@ -21,6 +21,7 @@ loadTool.loader(".p-head", ".p-foot");
 styleTool.rollingTrigger("body>.home");
 styleTool.preventDisplyNone(".p-head .icon-phone", ".p-head .phone-number");
 styleTool.preventDisplyNone(".p-head .icon-contextphone", ".p-head .qr-code");
+styleTool.dropDownMenu(".search-wrap>input.cities", ".search-wrap>.city-menu");
 styleTool.carousel({
   tar: ".home .carousel .img-list",
   runTime: 400,
@@ -30,16 +31,18 @@ styleTool.carousel({
 });
 styleTool.dateSelect(".search-wrap #from-date", ".search-wrap #to-date");
 styleTool.brandSwiper(Swiper);
-styleTool.showMap(".showMapClick");
 
 dataTool.brandDataLoader({
   page: "body>.list",
   swiperSlide: ".select-list .swiper-slide>a",
   pageBg: ".ally-select>img",
-  introWrap: ".ally-intro"
-})
+  introWrap: ".ally-intro",
+  showMap: styleTool.showMap
+});
+dataTool.cityLoader(".search-wrap .cities", ".search-wrap .city-menu");
 
 
 $(".my-form input").on("click", function(e) {
   console.log($(".my-form").serializeArray());
 })
+

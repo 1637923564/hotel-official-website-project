@@ -50,12 +50,17 @@ app.get("/api/city", (req, res) => {
 app.post("/api/hotel", (req, res) => {
   Hotel
     .find({})
+    .sort({comment: -1})
     .then(data => {
       let jsData = JSON.parse(JSON.stringify(data))
-      let newData = dataTreating.hotelConfig(req.body.brandName, jsData);
-      res.jsonp(newData);
+      if(req.body.brandName) {
+        let newData = dataTreating.hotelConfig(req.body.brandName, jsData);
+        res.jsonp(newData);
+      }else {
+        res.jsonp(jsData);
+      }
     })
     .catch(e => console.log(e.message));
 });
 
-app.listen(8000, () => console.log("http://localhost:8000"));
+app.listen(55558, () => console.log("http://localhost:55558"));

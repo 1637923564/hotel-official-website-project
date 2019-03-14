@@ -51,6 +51,33 @@ function StyleTool($) {
     });
   }
   /**
+   * input的下拉菜单（城市列表）
+   * @method dropDownMenu
+   * @param {String} cilckTar 触发下拉菜单的节点
+   * @param {String} menuTar 下拉菜单
+   */
+  this.dropDownMenu = function(cilckTar, menuTar) {
+    $(cilckTar).on("focus", function(e) {
+      $(menuTar).slideDown(200)
+    });
+    $(cilckTar).on("click", function(e) {
+      $(menuTar).slideDown(200)
+    });
+    $(cilckTar).on("blur", function(e) {
+      $(menuTar).slideUp(200)
+    })
+    $(menuTar+">div").on("mousedown", function(e) {
+      e.preventDefault();
+    })
+    $(menuTar+">span").on("mousedown", function(e) {
+      e.preventDefault();
+    })
+    $(menuTar+">span").on("mouseup", function(e) {
+      $(cilckTar).val($(this).text());
+      $(menuTar).slideUp(200);
+    })
+  }
+  /**
    * 主页面轮播图
    * @method carousel
    * @param {Object} data 参数集合

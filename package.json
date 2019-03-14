@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "amazeui": "^2.7.2",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jquery": "^2.2.3",
     "mongoose": "^5.4.18",

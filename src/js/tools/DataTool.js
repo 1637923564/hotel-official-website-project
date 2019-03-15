@@ -161,22 +161,63 @@ function DataTool($) {
       }
     })
   }
-  this.cityLoader = function(cityInput, cityMenu, dropDownMenu) {
+  /**
+   * 城市数据加载
+   * @method cityLoader
+   * @param {String} cityInput 输入框
+   * @param {String} cityMenu 城市下拉菜单
+   * @param {Function} dropDownMenu StyleTool模块的dropDownMenu
+   * @param {String} textInInput 实现下拉菜单提示时使用的参数（输入框中的文本）
+   */
+  this.cityLoader = function(cityInput, cityMenu, dropDownMenu, textInInput) {
     if($(cityInput).length) {
       $.ajax({
         type: "GET",
         url: "/api/city",
         success: function(data) {
-          let elStr = "<div>所有城市</div>";
-          for(let i = 0, len = data.length; i < len; i ++) {
+          let arr = [];
+          if(typeof(textInInput) !== "undefined") {
+            let reg = new RegExp(textInInput, "i");
+            for(var i = 0, len = data.length; i < len; i ++) {
+              let str = data[i].cname+ "市" + data[i].name + "shi";
+              if(str.match(reg)) {
+                arr.push(data[i]);
+              }
+            }
+          }
+          let menuData = arr.length > 0
+            ? arr
+            : data;
+          let headTxt = arr.length > 0
+            ? "为您找到了以下城市"
+            : "所有城市";
+          let elStr = "<div>"+ headTxt +"</div>";
+          for(var i = 0, len = menuData.length; i < len; i ++) {
             elStr += `
-            <span>${data[i].cname}</span>
+            <span>${menuData[i].cname}</span>
             `
           }
           $(cityMenu).html(elStr);
           dropDownMenu(cityInput, cityMenu);
         }
       })
+    }
+  }
+  /**
+   * 下拉菜单提示功能
+   * @method promptFacility
+   * @param {String} cityInput 输入框
+   * @param {String} cityMenu 城市下拉菜单
+   * @param {Function} dropDownMenu StyleTool模块的dropDownMenu
+   */
+  this.promptFacility = function(cityInput, cityMenu, dropDownMenu) {
+    let that = this;
+    let $cityInput = $(cityInput);
+    if($cityInput.length > 0) {
+      $cityInput[0].oninput = function(e) {
+        let textInInput = $(this).val();
+        that.cityLoader(cityInput, cityMenu, dropDownMenu, textInInput);
+      }
     }
   }
 }

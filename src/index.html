@@ -27,20 +27,22 @@
         </div>
       </div>
       <!-- 搜索栏 -->
-      <div class="search-wrap">
-        <input type="text" placeholder="请选择城市" class="cities"><!--
-        --><input type="text" placeholder="请选择入住日期" autocomplete="off" id="from-date"><!--
-        --><input type="text" placeholder="请输入结房日期" id="to-date"><!--
-        --><input type="text" autocomplete="off" placeholder="输入关键字" class="keyword"><!--
-        --><a href="/search.html">搜索</a>
-        <span class="iconfont icon-sousuo"></span>
-        <span class="iconfont icon-sousuo"></span>
-        <span class="iconfont icon-content_reco"></span>
-        <span class="iconfont icon-content_reco"></span>
-        <div class="city-menu">
-          <div>热门城市</div>
+      <form class="save-form">
+        <div class="search-wrap">
+          <input type="text" name="city" placeholder="请选择城市" value="杭州市" class="cities"><!--
+          --><input type="text" name="from-date" placeholder="请选择入住日期" autocomplete="off" id="from-date"><!--
+          --><input type="text" name="to-date" placeholder="请输入结房日期" id="to-date"><!--
+          --><input type="text" name="keyword" autocomplete="off" placeholder="输入关键字" class="keyword"><!--
+          --><a class="to-save" id="#dataTrans" href="/search.html">搜索</a>
+          <span class="iconfont icon-sousuo"></span>
+          <span class="iconfont icon-sousuo"></span>
+          <span class="iconfont icon-content_reco"></span>
+          <span class="iconfont icon-content_reco"></span>
+          <div class="city-menu">
+            <div>热门城市</div>
+          </div>
         </div>
-      </div>
+      </form>
       <!-- 内容栏 -->
       <div class="introduction">
         <!-- 说明 -->

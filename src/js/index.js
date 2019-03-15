@@ -21,6 +21,9 @@ loadTool.loader(".p-head", ".p-foot");
 styleTool.rollingTrigger("body>.home");
 styleTool.preventDisplyNone(".p-head .icon-phone", ".p-head .phone-number");
 styleTool.preventDisplyNone(".p-head .icon-contextphone", ".p-head .qr-code");
+styleTool.defaultVal("#from-date");
+styleTool.defaultVal("#to-date");
+styleTool.saveLocalstorage(".save-form", ".to-save");
 styleTool.carousel({
   tar: ".home .carousel .img-list",
   runTime: 400,
@@ -28,7 +31,7 @@ styleTool.carousel({
   fps: 60,
   btnWrap: ".home .carousel .btn"
 });
-styleTool.dateSelect(".search-wrap #from-date", ".search-wrap #to-date");
+styleTool.dateSelect(".search-wrap #from-date", ".search-wrap #to-date", ".search-wrap .cities");
 styleTool.brandSwiper(Swiper);
 
 dataTool.brandDataLoader({
@@ -39,6 +42,7 @@ dataTool.brandDataLoader({
   showMap: styleTool.showMap
 });
 dataTool.cityLoader(".search-wrap .cities", ".search-wrap .city-menu", styleTool.dropDownMenu);
+dataTool.promptFacility(".search-wrap .cities", ".search-wrap .city-menu", styleTool.dropDownMenu);
 
 
 $(".my-form input").on("click", function(e) {

@@ -41,14 +41,16 @@ function StyleTool($) {
    * @param {String} tar 需要取消隐藏的节点
    */
   this.preventDisplyNone = function(hoverTar, tar) {
-    setTimeout(() => {
-      $(hoverTar).on("mouseenter", function(e) {
-        $(tar).slideDown(150);
+    if($(hoverTar) > 0) {
+      setTimeout(() => {
+        $(hoverTar).on("mouseenter", function(e) {
+          $(tar).slideDown(150);
+        });
+        $(hoverTar).on("mouseleave", function(e) {
+          $(tar).slideUp(150);
+        });
       });
-      $(hoverTar).on("mouseleave", function(e) {
-        $(tar).slideUp(150);
-      });
-    });
+    }
   }
   /**
    * input的下拉菜单（城市列表）
@@ -57,25 +59,61 @@ function StyleTool($) {
    * @param {String} menuTar 下拉菜单
    */
   this.dropDownMenu = function(cilckTar, menuTar) {
-    $(cilckTar).on("focus", function(e) {
-      $(menuTar).slideDown(150)
-    });
-    $(cilckTar).on("click", function(e) {
-      $(menuTar).slideDown(150)
-    });
-    $(cilckTar).on("blur", function(e) {
-      $(menuTar).slideUp(150)
-    })
-    $(menuTar+">div").on("mousedown", function(e) {
-      e.preventDefault();
-    })
-    $(menuTar+">span").on("mousedown", function(e) {
-      e.preventDefault();
-    })
-    $(menuTar+">span").on("mouseup", function(e) {
-      $(cilckTar).val($(this).text());
-      $(menuTar).slideUp(150);
-    })
+    let $clickTar = $(cilckTar);
+    if($clickTar.length > 0) {
+      $clickTar.on("focus", function(e) {
+        $(menuTar).slideDown(150)
+      });
+      $clickTar.on("click", function(e) {
+        $(menuTar).slideDown(150)
+      });
+      $clickTar.on("blur", function(e) {
+        $(menuTar).slideUp(150)
+      })
+      $(menuTar+">div").on("mousedown", function(e) {
+        e.preventDefault();
+      })
+      $(menuTar+">span").on("mousedown", function(e) {
+        e.preventDefault();
+      })
+      $(menuTar+">span").on("mouseup", function(e) {
+        $(cilckTar).val($(this).text());
+        $(menuTar).slideUp(150);
+      })
+    }
+  }
+  /**
+   * 设置时间输入框的默认值
+   * @method defaultVal
+   * @param {String} tar 目标元素
+   */
+  this.defaultVal = function(tar) {
+    let $tar = $(tar);
+    if($tar.length > 0) {
+      let nowDate = new Date();
+      let nowTime = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
+      $tar.val(nowTime);
+    }
+  }
+  /**
+   * 将数据存储到本地
+   * @method saveLocalstorage
+   * @param {String} formData 将要存储的form表单数据
+   * @param {String} btnTar 触发按钮
+   */
+  this.saveLocalstorage = function(formData, btnTar) {
+    let $formData = $(formData);
+    let $btnTar = $(btnTar);
+    if($formData.length > 0 && $btnTar.length > 0) {
+      $btnTar.on("mousedown", function(e) {
+        let dataArr = $formData.serializeArray();
+        let dataObj = {};
+        for(let i = 0, len = dataArr.length; i < len; i ++) {
+          dataObj[dataArr[i].name] = dataArr[i].value;
+        }
+        localStorage.setItem("Norm_find_business", JSON.stringify(dataObj));
+      })
+    }
   }
   /**
    * 主页面轮播图
@@ -89,62 +127,64 @@ function StyleTool($) {
    */
   this.carousel = function(data) {
     let $tar = $(data.tar);
-    let $li = $tar.children("li");
-    var sign = 1;
-    setTimeout(() => {
-      $tar.parent().height($tar.height());
-    });
-    if($tar.length > 0) {
-      animate();
-    }
-    // 轮播动画
-    function animate() {
-      var ani = interval();
-      $(data.btnWrap).on("click", "div", function(e) {
-        clearInterval(ani);
-        let nowSign = $(e.currentTarget).attr("value")
-        let moveWidth = -($tar.width() / $li.length) * parseFloat(nowSign - 1);
-        $($tar[0]).animate({
-          left: moveWidth + "px"
-        });
-        sign = parseInt(nowSign) - 1;
-        btnAni();
-        ani = interval();
+    if(data.tar.length > 0) {
+      let $li = $tar.children("li");
+      var sign = 1;
+      setTimeout(() => {
+        $tar.parent().height($tar.height());
       });
-    }
-    function interval() {
-      var interval = setInterval(() => {
-        var anm = setInterval(() => {
-          let tarW = $tar.width();
-          let tarLfOfStr = $tar[0].style.left;
-          let tarLf = tarLfOfStr ? parseFloat(tarLfOfStr) : 0;
-          let changeOfLf = -tarW / ($li.length* data.fps);
-          if(tarW/$li.length * sign + tarLf < Math.abs(changeOfLf)) {
-            $tar[0].style.left = (-tarW/$li.length)*sign + "px";
-            sign += 1;
-            clearInterval(anm);
-            if(sign === $li.length) {
-              sign = 1;
-              $tar[0].style.left = 0;
+      if($tar.length > 0) {
+        animate();
+      }
+      // 轮播动画
+      function animate() {
+        var ani = interval();
+        $(data.btnWrap).on("click", "div", function(e) {
+          clearInterval(ani);
+          let nowSign = $(e.currentTarget).attr("value")
+          let moveWidth = -($tar.width() / $li.length) * parseFloat(nowSign - 1);
+          $($tar[0]).animate({
+            left: moveWidth + "px"
+          });
+          sign = parseInt(nowSign) - 1;
+          btnAni();
+          ani = interval();
+        });
+      }
+      function interval() {
+        var interval = setInterval(() => {
+          var anm = setInterval(() => {
+            let tarW = $tar.width();
+            let tarLfOfStr = $tar[0].style.left;
+            let tarLf = tarLfOfStr ? parseFloat(tarLfOfStr) : 0;
+            let changeOfLf = -tarW / ($li.length* data.fps);
+            if(tarW/$li.length * sign + tarLf < Math.abs(changeOfLf)) {
+              $tar[0].style.left = (-tarW/$li.length)*sign + "px";
+              sign += 1;
+              clearInterval(anm);
+              if(sign === $li.length) {
+                sign = 1;
+                $tar[0].style.left = 0;
+              }
+              return;
             }
-            return;
+            $tar[0].style.left = tarLf + changeOfLf + "px";
+          }, data.runTime/data.fps);
+          btnAni();
+        }, data.interval);
+        return interval;
+      }
+      // 按钮动画
+      function btnAni() {
+        let $btn = $(data.btnWrap).children();
+        for(var i = 0, len = $btn.length; i < len; i ++) {
+          if(i === sign) {
+            $btn.removeClass("click-bg");
+            $btn[i].className = "click-bg"
+          }else if(sign === 3) {
+            $btn.removeClass("click-bg");
+            $btn[0].className = "click-bg"
           }
-          $tar[0].style.left = tarLf + changeOfLf + "px";
-        }, data.runTime/data.fps);
-        btnAni();
-      }, data.interval);
-      return interval;
-    }
-    // 按钮动画
-    function btnAni() {
-      let $btn = $(data.btnWrap).children();
-      for(var i = 0, len = $btn.length; i < len; i ++) {
-        if(i === sign) {
-          $btn.removeClass("click-bg");
-          $btn[i].className = "click-bg"
-        }else if(sign === 3) {
-          $btn.removeClass("click-bg");
-          $btn[0].className = "click-bg"
         }
       }
     }
@@ -153,30 +193,55 @@ function StyleTool($) {
    * @method dateSelect
    * @param {String} fromTar 日期选中输入框(起始日期)
    * @param {String} toTar 日期选择输入框(结束日期)
+   * @param {String} beforFrom 起始时间输入框前一个input节点
    */
-  this.dateSelect = function(fromTar, toTar) {
+  this.dateSelect = function(fromTar, toTar, beforFrom) {
     let $fromTar = $(fromTar);
     let $toTar =  $(toTar);
     if($fromTar.length > 0 && $toTar.length > 0) {
-      // 为起始时间选择器设置样式
-      $fromTar.datepicker({
-        minDate: 0
+      // 为起始时间选择器设置触发条件
+      $fromTar.on("mousedown", function(e) {
+        fromTimeWrap();
       });
-      $fromTar.datepicker("option", "showAnim", "blind");
-      $fromTar.datepicker("option", "dateFormat", "yy-mm-dd");
+      $(beforFrom).on("keydown", function(e) {
+        if(e.keyCode === 9) {
+          fromTimeWrap();
+        }
+      });
+      // 为结束时间选择器设置触发条件
       $toTar.on("mousedown", function(e) {
+        toTimeWrap();
+      });
+      $fromTar.on("keydown", function(e) {
+        if(e.keyCode === 9) {
+          toTimeWrap();
+        }
+      });
+      // 设置起始时间选择器
+      function fromTimeWrap() {
+        $fromTar.datepicker({
+          minDate: 0
+        });
+        $fromTar.datepicker("option", "showAnim", "blind");
+        $fromTar.datepicker("option", "dateFormat", "yy-mm-dd");
+      }
+      // 设置结束时间选择器
+      function toTimeWrap() {
         let fromTarVal = $fromTar.val();
-        // 为结束时间选择器设置样式
         if(fromTarVal) {
-          console.log(fromTarVal)
-        }else {
+          let fromTime = new Date(fromTarVal);
+          let nowTime = new Date();
+          let timeDifference = fromTime - nowTime;
+          let tarTime = Math.ceil(timeDifference / 86400000);
           $toTar.datepicker({
-            minDate: 0
+            minDate: tarTime
           });
           $toTar.datepicker("option", "showAnim", "blind");
           $toTar.datepicker("option", "dateFormat", "yy-mm-dd");
+        }else {
+          alert("请先选择入住事件")
         }
-      });
+      }
     }
   }
   /**

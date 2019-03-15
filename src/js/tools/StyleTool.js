@@ -43,10 +43,10 @@ function StyleTool($) {
   this.preventDisplyNone = function(hoverTar, tar) {
     setTimeout(() => {
       $(hoverTar).on("mouseenter", function(e) {
-        $(tar).slideDown(200);
+        $(tar).slideDown(150);
       });
       $(hoverTar).on("mouseleave", function(e) {
-        $(tar).slideUp(200);
+        $(tar).slideUp(150);
       });
     });
   }
@@ -58,13 +58,13 @@ function StyleTool($) {
    */
   this.dropDownMenu = function(cilckTar, menuTar) {
     $(cilckTar).on("focus", function(e) {
-      $(menuTar).slideDown(200)
+      $(menuTar).slideDown(150)
     });
     $(cilckTar).on("click", function(e) {
-      $(menuTar).slideDown(200)
+      $(menuTar).slideDown(150)
     });
     $(cilckTar).on("blur", function(e) {
-      $(menuTar).slideUp(200)
+      $(menuTar).slideUp(150)
     })
     $(menuTar+">div").on("mousedown", function(e) {
       e.preventDefault();
@@ -74,7 +74,7 @@ function StyleTool($) {
     })
     $(menuTar+">span").on("mouseup", function(e) {
       $(cilckTar).val($(this).text());
-      $(menuTar).slideUp(200);
+      $(menuTar).slideUp(150);
     })
   }
   /**
@@ -164,12 +164,19 @@ function StyleTool($) {
       });
       $fromTar.datepicker("option", "showAnim", "blind");
       $fromTar.datepicker("option", "dateFormat", "yy-mm-dd");
-      // 为结束时间选择器设置样式
-      $toTar.datepicker({
-        minDate: 0
+      $toTar.on("mousedown", function(e) {
+        let fromTarVal = $fromTar.val();
+        // 为结束时间选择器设置样式
+        if(fromTarVal) {
+          console.log(fromTarVal)
+        }else {
+          $toTar.datepicker({
+            minDate: 0
+          });
+          $toTar.datepicker("option", "showAnim", "blind");
+          $toTar.datepicker("option", "dateFormat", "yy-mm-dd");
+        }
       });
-      $toTar.datepicker("option", "showAnim", "blind");
-      $toTar.datepicker("option", "dateFormat", "yy-mm-dd");
     }
   }
   /**

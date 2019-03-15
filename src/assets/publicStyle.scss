@@ -186,8 +186,6 @@ input {
       border-radius: 2px;
       display: none;
       padding: 0 20px;
-      height: 400px;
-      overflow: auto;
       z-index: 1000;
       &::before {
         content: "";
@@ -508,7 +506,7 @@ input {
     height: 35px !important;
     a, span {
       height: 40px !important;
-      width: 35px !important;
+      width: 60px !important;
       border: transparent !important;
       text-align: center !important;
       &:hover {

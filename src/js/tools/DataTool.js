@@ -161,19 +161,20 @@ function DataTool($) {
       }
     })
   }
-  this.cityLoader = function(cityInput, cityMenu) {
+  this.cityLoader = function(cityInput, cityMenu, dropDownMenu) {
     if($(cityInput).length) {
       $.ajax({
         type: "GET",
         url: "/api/city",
         success: function(data) {
-          let elStr = "<div>热门城市</div>";
+          let elStr = "<div>所有城市</div>";
           for(let i = 0, len = data.length; i < len; i ++) {
             elStr += `
             <span>${data[i].cname}</span>
             `
           }
           $(cityMenu).html(elStr);
+          dropDownMenu(cityInput, cityMenu);
         }
       })
     }

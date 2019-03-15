@@ -21,7 +21,6 @@ loadTool.loader(".p-head", ".p-foot");
 styleTool.rollingTrigger("body>.home");
 styleTool.preventDisplyNone(".p-head .icon-phone", ".p-head .phone-number");
 styleTool.preventDisplyNone(".p-head .icon-contextphone", ".p-head .qr-code");
-styleTool.dropDownMenu(".search-wrap>input.cities", ".search-wrap>.city-menu");
 styleTool.carousel({
   tar: ".home .carousel .img-list",
   runTime: 400,
@@ -39,7 +38,7 @@ dataTool.brandDataLoader({
   introWrap: ".ally-intro",
   showMap: styleTool.showMap
 });
-dataTool.cityLoader(".search-wrap .cities", ".search-wrap .city-menu");
+dataTool.cityLoader(".search-wrap .cities", ".search-wrap .city-menu", styleTool.dropDownMenu);
 
 
 $(".my-form input").on("click", function(e) {

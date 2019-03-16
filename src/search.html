@@ -17,18 +17,18 @@
     <div class="p-head"></div>
     <div class="p-content">
       <!-- 搜索栏 -->
-      <form>
+      <form class="save-form">
         <div class="search-bg">
           <div class="search-wrap">
-            <input type="text" placeholder="请选择城市" class="cities">
+            <input type="text" name="city" placeholder="请选择城市" class="cities" value="杭州市">
             <!--
-            --><input type="text" placeholder="请选择入住日期" autocomplete="off" id="from-date">
+            --><input type="text" name="from-date" placeholder="请选择入住日期" autocomplete="off" id="from-date">
             <!--
-            --><input type="text" placeholder="请输入结房日期" id="to-date">
+            --><input type="text" name="to-date" placeholder="请输入结房日期" id="to-date">
             <!--
-            --><input type="text" autocomplete="off" placeholder="输入关键字" class="keyword">
+            --><input type="text" name="keyword" autocomplete="off" placeholder="输入关键字" class="keyword">
             <!--
-            --><a href="javascript:">搜索</a>
+            --><a href="javascript:" class="to-save">搜索</a>
             <span class="iconfont icon-sousuo"></span>
             <span class="iconfont icon-sousuo"></span>
             <span class="iconfont icon-content_reco"></span>

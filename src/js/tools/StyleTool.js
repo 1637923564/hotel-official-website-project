@@ -1,7 +1,7 @@
 /**
  * 网页样式
  * @module StyleTool
- * @param {JQueryStatic} $ 需要手动引入jQuery对象
+ * @param {JQueryStatic} $ 手动引入jQuery对象
  */
 function StyleTool($) {
   // #region 实现 省略new关键字也能实例化对象
@@ -36,21 +36,22 @@ function StyleTool($) {
   }
   /**
    * 显示被隐藏的内容
-   * @method preventDisplyNone
+   * @method preventDisplayNone
    * @param {String} hoverTar 触发效果的节点
    * @param {String} tar 需要取消隐藏的节点
    */
-  this.preventDisplyNone = function(hoverTar, tar) {
-    if($(hoverTar) > 0) {
-      setTimeout(() => {
-        $(hoverTar).on("mouseenter", function(e) {
-          $(tar).slideDown(150);
+  this.preventDisplayNone = function(hoverTar, tar) {
+    setTimeout(() => {
+      let $hoverTar = $(hoverTar);
+      if($hoverTar.length > 0) {
+        $hoverTar.on("mouseenter", function(e) {
+          $(tar).slideDown(100);
         });
-        $(hoverTar).on("mouseleave", function(e) {
-          $(tar).slideUp(150);
+        $hoverTar.on("mouseleave", function(e) {
+          $(tar).slideUp(100);
         });
-      });
-    }
+      }
+    });
   }
   /**
    * input的下拉菜单（城市列表）
@@ -86,33 +87,68 @@ function StyleTool($) {
    * 设置时间输入框的默认值
    * @method defaultVal
    * @param {String} tar 目标元素
+   * @param {String} page 执行该方法的页面
    */
-  this.defaultVal = function(tar) {
-    let $tar = $(tar);
-    if($tar.length > 0) {
+  this.defaultVal = function(tar, page) {
+    if($(tar).length > 0 && $(page).length > 0) {
       let nowDate = new Date();
       let nowTime = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`
-      $tar.val(nowTime);
+      $(tar).val(nowTime);
+    }
+  }
+  /**
+   * 设置搜索栏默认数据
+   * @method defaultFormData
+   * @param {Object} params 参数集合
+   * @param {String} params.cityInput 城市输入框
+   * @param {String} params.fromInput 入住时间输入框
+   * @param {String} params.toInput 离店时间输入框
+   * @param {String} params.keyInput 关键字输入框
+   * @param {String} params.page 执行该方法的页面
+   */
+  this.defaultFormData = function(params) {
+    if($(params.page).length > 0) {
+      let localData = localStorage.getItem("Norm_find_business");
+      let $fromInput = $(params.fromInput);
+      let $toInput = $(params.toInput);
+      let $keyInput = $(params.keyInput);
+      let $cityInput = $(params.cityInput);
+      if(!localData) {
+        this.defaultVal($fromInput, params.page);
+        this.defaultVal($toInput, params.page);
+      }else {
+        localData = JSON.parse(localData);
+        $cityInput.val(localData.city);
+        $fromInput.val(localData["from-date"]);
+        $keyInput.val(localData.keyword);
+        $toInput.val(localData["to-date"]);
+      }
     }
   }
   /**
    * 将数据存储到本地
    * @method saveLocalstorage
-   * @param {String} formData 将要存储的form表单数据
+   * @param {String} formData 将要存储的form数据
    * @param {String} btnTar 触发按钮
+   * @param {String} sFormData search页面的form数据
+   * @param {String} sBtnTar search页面的触发按钮
    */
   this.saveLocalstorage = function(formData, btnTar) {
     let $formData = $(formData);
     let $btnTar = $(btnTar);
     if($formData.length > 0 && $btnTar.length > 0) {
       $btnTar.on("mousedown", function(e) {
-        let dataArr = $formData.serializeArray();
-        let dataObj = {};
-        for(let i = 0, len = dataArr.length; i < len; i ++) {
-          dataObj[dataArr[i].name] = dataArr[i].value;
-        }
-        localStorage.setItem("Norm_find_business", JSON.stringify(dataObj));
-      })
+        console.log($formData.serializeArray())
+        saveFormData();
+      });
+    }
+    function saveFormData() {
+      let dataArr = $formData.serializeArray();
+      let dataObj = {};
+      for(let i = 0, len = dataArr.length; i < len; i ++) {
+        dataObj[dataArr[i].name] = dataArr[i].value;
+      }
+      localStorage.setItem("Norm_find_business", JSON.stringify(dataObj));
     }
   }
   /**

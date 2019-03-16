@@ -19,10 +19,17 @@ let dataTool = new DataTool($);
 
 loadTool.loader(".p-head", ".p-foot");
 styleTool.rollingTrigger("body>.home");
-styleTool.preventDisplyNone(".p-head .icon-phone", ".p-head .phone-number");
-styleTool.preventDisplyNone(".p-head .icon-contextphone", ".p-head .qr-code");
-styleTool.defaultVal("#from-date");
-styleTool.defaultVal("#to-date");
+styleTool.preventDisplayNone(".p-head .icon-phone", ".p-head .phone-number");
+styleTool.preventDisplayNone(".p-head .icon-contextphone", ".p-head .qr-code");
+styleTool.defaultVal("#from-date", ".home");
+styleTool.defaultVal("#to-date", ".home");
+styleTool.defaultFormData({
+  cityInput: ".cities",
+  fromInput: "#from-date",
+  toInput: "#to-date",
+  keyInput: ".keyword",
+  page: ".search"
+});
 styleTool.saveLocalstorage(".save-form", ".to-save");
 styleTool.carousel({
   tar: ".home .carousel .img-list",
@@ -48,4 +55,3 @@ dataTool.promptFacility(".search-wrap .cities", ".search-wrap .city-menu", style
 $(".my-form input").on("click", function(e) {
   console.log($(".my-form").serializeArray());
 })
-

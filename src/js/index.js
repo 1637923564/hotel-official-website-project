@@ -53,5 +53,9 @@ dataTool.promptFacility(".search-wrap .cities", ".search-wrap .city-menu", style
 dataTool.searchCities({
   page: "body>.search",
   searchBtn: ".to-save",
-  form: ".save-form"
+  form: ".save-form",
+  comDis: ".my-form .hotel-select .com-dis",
+  district: ".my-form .hotel-select .district",
+  brand: ".my-form .hotel-select .brand-sel",
+  showMap: styleTool.showMap
 });

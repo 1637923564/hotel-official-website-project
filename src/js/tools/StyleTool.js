@@ -97,7 +97,7 @@ function StyleTool($) {
     }
   }
   /**
-   * 设置搜索栏默认数据
+   * 设置搜索栏默认值
    * @method defaultFormData
    * @param {Object} params 参数集合
    * @param {String} params.cityInput 城市输入框
@@ -130,8 +130,6 @@ function StyleTool($) {
    * @method saveLocalstorage
    * @param {String} formData 将要存储的form数据
    * @param {String} btnTar 触发按钮
-   * @param {String} sFormData search页面的form数据
-   * @param {String} sBtnTar search页面的触发按钮
    */
   this.saveLocalstorage = function(formData, btnTar) {
     let $formData = $(formData);

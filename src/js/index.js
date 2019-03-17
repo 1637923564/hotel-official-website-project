@@ -50,8 +50,8 @@ dataTool.brandDataLoader({
 });
 dataTool.cityLoader(".search-wrap .cities", ".search-wrap .city-menu", styleTool.dropDownMenu);
 dataTool.promptFacility(".search-wrap .cities", ".search-wrap .city-menu", styleTool.dropDownMenu);
-
-
-$(".my-form input").on("click", function(e) {
-  console.log($(".my-form").serializeArray());
-})
+dataTool.searchCities({
+  page: "body>.search",
+  searchBtn: ".to-save",
+  form: ".save-form"
+});

@@ -19,15 +19,15 @@ function DataTool($) {
    * @param {String} params.introWrap 介绍模块的背景图
    * @param {Function} params.showMap StyleTool模块的showMap方法
    */
-  this.brandDataLoader = function(params) {
-    if($(params.page).length > 0) {
+  this.brandDataLoader = function (params) {
+    if ($(params.page).length > 0) {
       let that = this;
       $.ajax({
         type: "GET",
         url: "/api/brand",
-        success: function(data) {
+        success: function (data) {
           let $swiperSlide = $(params.swiperSlide);
-          $swiperSlide.on("click", function(e) {
+          $swiperSlide.on("click", function (e) {
             // 防止点击a标签界面跳转
             e.preventDefault();
             let $clickSwiperSlide = $(this)
@@ -42,8 +42,8 @@ function DataTool($) {
             $clickSwiperSlide.parent(".swiper-slide").siblings(".swiper-slide").children("a").removeClass("click-style");
             $clickSwiperSlide.addClass("click-style");
             var selectedBrand = {};
-            for(let i = 0, len = data.length; i < len; i ++) {
-              if(data[i].brandName === brandName) {
+            for (let i = 0, len = data.length; i < len; i++) {
+              if (data[i].brandName === brandName) {
                 selectedBrand = data[i];
               }
             }
@@ -72,22 +72,24 @@ function DataTool($) {
    * @param {String} params.brandName 品牌
    * @param {Function} params.showMap StyleTool模块的showMap方法
    */
-  this.hotelLoader = function(params) {
+  this.hotelLoader = function (params) {
     $.ajax({
       type: "POST",
       url: "/api/hotel",
-      data: {brandName: params.brandName},
-      success: function(data) {
+      data: {
+        brandName: params.brandName
+      },
+      success: function (data) {
         let elStr = "";
         let dataObj = {};
         let facilitiesStr = "";
-        if(data.length === 0) {
+        if (data.length === 0) {
           elStr = "暂无酒店"
-        }else {
-          for(let i = 0, len = data.length;i < len; i ++) {
+        } else {
+          for (let i = 0, len = data.length; i < len; i++) {
             dataObj = data[i];
             facilitiesStr = "";
-            for(let j = 0, len2 = dataObj.facilities.length; j < len2; j ++) {
+            for (let j = 0, len2 = dataObj.facilities.length; j < len2; j++) {
               switch (dataObj.facilities[j]) {
                 case "wifi":
                   facilitiesStr += `<span class="iconfont icon-wifi"></span>`
@@ -169,30 +171,30 @@ function DataTool($) {
    * @param {Function} dropDownMenu StyleTool模块的dropDownMenu
    * @param {String} textInInput 实现下拉菜单提示时使用的参数（输入框中的文本）
    */
-  this.cityLoader = function(cityInput, cityMenu, dropDownMenu, textInInput) {
-    if($(cityInput).length) {
+  this.cityLoader = function (cityInput, cityMenu, dropDownMenu, textInInput) {
+    if ($(cityInput).length) {
       $.ajax({
         type: "GET",
         url: "/api/city",
-        success: function(data) {
+        success: function (data) {
           let arr = [];
-          if(typeof(textInInput) !== "undefined") {
+          if (typeof (textInInput) !== "undefined") {
             let reg = new RegExp(textInInput, "i");
-            for(var i = 0, len = data.length; i < len; i ++) {
-              let str = data[i].cname+ "市" + data[i].name + "shi";
-              if(str.match(reg)) {
+            for (var i = 0, len = data.length; i < len; i++) {
+              let str = data[i].cname + "市" + data[i].name + "shi";
+              if (str.match(reg)) {
                 arr.push(data[i]);
               }
             }
           }
-          let menuData = arr.length > 0
-            ? arr
-            : data;
-          let headTxt = arr.length > 0
-            ? "为您找到了以下城市"
-            : "所有城市";
-          let elStr = "<div>"+ headTxt +"</div>";
-          for(var i = 0, len = menuData.length; i < len; i ++) {
+          let menuData = arr.length > 0 ?
+            arr :
+            data;
+          let headTxt = arr.length > 0 ?
+            "为您找到了以下城市" :
+            "所有城市";
+          let elStr = "<div>" + headTxt + "</div>";
+          for (var i = 0, len = menuData.length; i < len; i++) {
             elStr += `
             <span>${menuData[i].cname}</span>
             `
@@ -210,14 +212,101 @@ function DataTool($) {
    * @param {String} cityMenu 城市下拉菜单
    * @param {Function} dropDownMenu StyleTool模块的dropDownMenu
    */
-  this.promptFacility = function(cityInput, cityMenu, dropDownMenu) {
+  this.promptFacility = function (cityInput, cityMenu, dropDownMenu) {
     let that = this;
     let $cityInput = $(cityInput);
-    if($cityInput.length > 0) {
-      $cityInput[0].oninput = function(e) {
+    if ($cityInput.length > 0) {
+      $cityInput[0].oninput = function (e) {
         let textInInput = $(this).val();
         that.cityLoader(cityInput, cityMenu, dropDownMenu, textInInput);
       }
+    }
+  }
+  /**
+   * 实现城市搜索功能
+   * @method searchCities
+   * @param {Object} params 参数集合
+   * @param {String} params.searchBtn 搜索按钮
+   * @param {String} params.form 表单
+   * @param {String} params.page 使用该方法的页面
+   */
+  this.searchCities = function (params) {
+    if ($(params.page).length > 0) {
+      $.ajax({
+        type: "GET",
+        async: false,
+        url: "/api/city",
+        success: function(data) {
+
+          
+          $.ajax({
+            type: "POST",
+            url: "/api/hotel",
+            success: function (data2) {
+              let $searchBtn = $(params.searchBtn);
+              let $form = $(params.form);
+              $searchBtn.click(function (e) {
+                $(".my-form input").unbind("click"); // 清除能够通过该事件创建的事件，以免创建多个相同事件
+                let formDataArr = $form.serializeArray();
+                let formData = {};
+                // 将frmDataArr简化为一个对象，方便后续操作
+                for (var i = 0, len = formDataArr.length; i < len; i++) {
+                  formData[formDataArr[i].name] = formDataArr[i].value;
+                }
+                // 搜索实现
+                let newData = []; // 创建一个空数组，盛放酒店数据
+                for (var i = 0, len = data2.length; i < len; i++) {
+                  let str = data2[i].hotelName + data2[i].address + data2[i].type + data2[i].comDis + data2[i].district;
+                  let cityReg = new RegExp(formData.city);
+                  let keyReg = new RegExp(formData.keyword);
+                  if (str.match(cityReg)) {
+                    if (str.match(keyReg)) {
+                      newData.push(data2[i]);
+                    }
+                  }
+                }
+                $(".my-form input").on("click", function(e) {
+                  let selDataArr = $(".my-form").serializeArray();
+                  let comDisArr = []; // 盛放被选中的商区数据
+                  let districtArr = []; // 盛放被选中的区政府数据
+                  let brandSelArr = []; // 盛放被选中的品牌数据
+                  let facilitiesArr = []; // 盛放被选中的设施数据
+                  let newData2 = [];
+                  // let cPass = false;
+                  // let dPass = false;
+                  // let bPass = false; // 三个变量作为判断是否通过筛选的标准
+                  for(var i = 0, len = selDataArr.length; i < len; i ++) {
+                    switch (selDataArr[i].name) {
+                      case "comDis":
+                        comDisArr.push(selDataArr[i].value)
+                        break;
+                      case "district":
+                        districtArr.push(selDataArr[i].value)
+                        break;
+                      case "brandSel":
+                        brandSelArr.push(selDataArr[i].value)
+                        break;
+                      case "facilities":
+                        facilitiesArr.push(selDataArr[i].value)
+                        break;
+                    }
+                  }
+                  // 如果盛放数据的容器为空，则将所有的选项都存放进去
+                  console.log(facilitiesArr) //------------------
+                  for(var i = 0, len = newData.length; i < len; i ++) {
+                    // cPass = false; dPass = false; bPass = false;
+                    for(var c = 0, len = comDisArr.length; c < len; c ++) {
+                      if(newData[i].comDis === comDisArr[c]) {
+                        newData2.push(newData[i]);
+                      }
+                    }
+                  }
+                })
+              })
+            }
+          });
+        }
+      })
     }
   }
 }

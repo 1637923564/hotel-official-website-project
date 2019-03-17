@@ -138,7 +138,6 @@ function StyleTool($) {
     let $btnTar = $(btnTar);
     if($formData.length > 0 && $btnTar.length > 0) {
       $btnTar.on("mousedown", function(e) {
-        console.log($formData.serializeArray())
         saveFormData();
       });
     }

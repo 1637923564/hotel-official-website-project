@@ -5,7 +5,7 @@ const autoprefixer = require("autoprefixer");
 const OptimizeCssAssetsWebpackPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyjsWebpackPlugin = require("uglifyjs-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 const common = require("./webpack.common");
 
@@ -50,6 +50,7 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "css/[name][hash].css",
       chunkFilename: "css/[id][hash].css"

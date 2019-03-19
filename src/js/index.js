@@ -40,6 +40,15 @@ styleTool.carousel({
 });
 styleTool.dateSelect(".search-wrap #from-date", ".search-wrap #to-date", ".search-wrap .cities");
 styleTool.brandSwiper(Swiper);
+styleTool.showLogIn({
+  logInClick: ".p-head .un-log",
+  logNav: ".log-nav",
+  phoneLog: ".log-nav>.lf",
+  passwordLog: ".log-nav>.rt",
+  phoneLogWrap: ".for-phone",
+  passwordLogWrap: ".for-password"
+})
+styleTool.showLogIn(".p-head .un-log", ".log-nav>lf", ".log-nav>rt");
 
 dataTool.brandDataLoader({
   page: "body>.list",

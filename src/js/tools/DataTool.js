@@ -154,7 +154,9 @@ function DataTool($) {
         }
       }
       $(".search .hotel-list>.hotel").html(elStr)
-      params.showMap(".showMapClick")
+      setTimeout(() => {
+        params.showMap(".showMapClick");
+      });
     }else {
       $.ajax({
         type: "POST",
@@ -242,7 +244,9 @@ function DataTool($) {
             }
           }
           $(".list .hotel-list>.hotel").html(elStr)
-          params.showMap(".showMapClick")
+          setTimeout(() => {
+            params.showMap(".showMapClick")
+          });
         }
       })
     }

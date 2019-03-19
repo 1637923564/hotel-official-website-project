@@ -291,8 +291,9 @@ function StyleTool($) {
     });
   }
   /**
+   * 地图弹出层
    * @method showMap
-   * @param {String} mapClick 触发弹出框效果的节点
+   * @param {String} mapClick 触发弹出层的按钮
    */
   this.showMap = function(mapClick) {
     let $mapClick = $(mapClick);
@@ -323,10 +324,72 @@ function StyleTool($) {
           area : ['1000px' , '520px'],
           content: $("#layerMapWrap")
         });
-
-        // let addr = $("#layerMapWrap").attr("address");
       })
     }
+  }
+  /**
+   * 登录注册弹出层
+   * @method showLogIn
+   * @param {Object} params
+   * @param {String} params.logInClick 触发弹出层的按钮
+   * @param {String} params.logNav 需要触发界面变化的事件的按钮父元素
+   * @param {String} params.phoneLog 手机登录按钮
+   * @param {String} params.passwordLog 密码登录按钮
+   * @param {String} params.phoneLogWrap 使用手机登录时显示的表单
+   * @param {String} params.passwordLogWrap 使用密码登录时现实的表单
+   */
+  this.showLogIn = function(params) {
+    //#region 生成登录wrap
+    let layerWrapStr = `
+      <div id="layerLogWrap">
+        <div class="log-nav">
+          <div class="lf click-style">手机登录</div>
+          <div class="rt">密码登录</div>
+        </div>
+        <form class="for-phone">
+          <input type="text" placeholder="请输入手机号码" class="phone">
+          <input type="text" placeholder="请输入验证码" class="veri">
+          <a href="JavaScript:" class="cover">获取验证码</a>
+        </form>
+        <form class="for-password">
+          <input type="text" placeholder="请输入手机号码" class="phone">
+          <input type="text" placeholder="请输入密码" class="veri">
+        </form>
+        <a href="javascript:" class="btn">登录</a>
+        <a href="javascript:" class="for-password">忘记密码？</a>
+      </div>
+    `;
+    $("body").append(layerWrapStr);
+    //#endregion
+    if($(params.phoneLog) && $(params.passwordLog)) {
+      $(params.logNav).on("click", "div", function(e) {
+        $(this).siblings().removeClass("click-style");
+        $(this).addClass("click-style");
+        if($(this)[0] === $(params.phoneLog)[0]) {
+          $(params.passwordLogWrap).css("display", "none");
+          $(params.phoneLogWrap).css("display", "block");
+        }else if($(this)[0] === $(params.passwordLog)[0]) {
+          $(params.phoneLogWrap).css("display", "none");
+          $(params.passwordLogWrap).css("display", "block");
+        }
+      });
+    }
+    setTimeout(() => {
+      if($(params.logInClick).length > 0) {
+        $(params.logInClick).click(function(e) {
+          layer.open({
+            type: 1,
+            title: false,
+            id: 'LAY_layuipro', //设定一个id，防止重复弹出
+            area : ['389px' , '412px'],
+            content: $("#layerLogWrap"),
+            moveType: 0,
+          });
+          $(params.phoneLog).click();
+        });
+      }
+    });
+    
   }
 }
 export default StyleTool;

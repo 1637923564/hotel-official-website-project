@@ -49,7 +49,7 @@ input {
   width: 100%;
   background-color: rgb(26,26,26);
   line-height: 68px;
-  z-index: 10000;
+  z-index: 2000;
   .nav-wrap {
     height: 100%;
     padding: 12px 0;
@@ -79,11 +79,16 @@ input {
             background: url(../image/down-arrow.png) no-repeat 35px -1px;
             background-size: 40%;
             padding-right: 29px;
+            display: none;
             &:hover {
               background: url(../image/up-arrow.png) no-repeat 35px -1px;
               background-size: 40%;
             }
           }
+        }
+        .un-log {
+          background-size: 40%;
+          padding-right: 29px;
         }
       }
       a {
@@ -109,13 +114,13 @@ input {
         }
       }
       .phone-number {
-        left: 51%;
+        left: 48%;
         padding: 12px 29px;
         height: 73px;
         width: 200px;
       }
       .qr-code {
-        left: 57%;
+        left: 55%;
         height: auto;
         width: auto;
         padding: 24px;
@@ -124,6 +129,7 @@ input {
         color: $golden;
         font-weight: 600;
         img {
+          display: block;
           height: 142px;
           width: 142px;
         }
@@ -523,5 +529,77 @@ input {
   }
   .ui-datepicker-unselectable {
     cursor: no-drop !important;
+  }
+}
+#layerLogWrap {
+  display: none;
+  width: 389px;
+  height: 412px;
+  padding: 0 51px;
+  .log-nav {
+    height: 76px;
+    display: flex;
+    line-height: 76px;
+    text-align: center;
+    font-size: 18px;
+    color: #B3B3B3;
+    .lf, .rt {
+      flex: 1;
+      cursor: pointer;
+    }
+    .click-style {
+      color: #000;
+    }
+  }
+  .for-phone, form.for-password {
+    position: relative;
+    height: 170px;
+    input {
+      margin: 18px 0;
+      width: 286px;
+      height: 44px;
+      box-sizing: border-box;
+      padding: 0 15px;
+      border: 1px solid #DCDFE6;
+      border-radius: 4px;
+      &:nth-child(2) {
+        margin-top: 0;
+      }
+      &::placeholder {
+        color: #C1C4D3;
+      }
+      &:focus {
+        border-color: #409EFF;
+      }
+    }
+    .cover {
+      position: absolute;
+      width: 94px;
+      height: 44px;
+      text-align: center;
+      line-height: 44px;
+      color: #fff;
+      background-color: $golden;
+      border-radius: 0 4px 4px 0;
+      top: 80px;
+      right: 2px;
+    }
+  }
+  a.for-password {
+    display: block;
+    margin-top: 24px;
+    text-align: right;
+    color: $golden;
+  }
+  .btn {
+    display: block;
+    width: 286px;
+    height: 48px;
+    margin: 0 auto;
+    background-color: #000;
+    text-align: center;
+    line-height: 48px;
+    color: #fff;
+    font-size: 16px;
   }
 }

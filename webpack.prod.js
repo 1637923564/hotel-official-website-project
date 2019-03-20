@@ -81,6 +81,11 @@ module.exports = merge(common, {
       inject: "body"
     }),
     new HtmlWebpackPlugin({
+      filename: "personage.html",
+      template: "./src/personage.html",
+      inject: "body"
+    }),
+    new HtmlWebpackPlugin({
       filename: "views/partials/head.html",
       template: "./src/partial/head.html",
       chunks: [""] // 选择需要引入的某些块，传空为不引入

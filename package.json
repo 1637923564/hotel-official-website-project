@@ -5,12 +5,16 @@
   "license": "MIT",
   "dependencies": {
     "amazeui": "^2.7.2",
+    "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jquery": "^2.2.3",
     "js-cookie": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.18",
     "node-gyp": "^3.8.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "swiper": "^4.5.0"
   },
   "devDependencies": {

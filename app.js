@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 const apiRouter = require("./routes/api"); //引入router
+const userRouter = require("./routes/user");
 
 const app = express();
 
@@ -21,7 +23,12 @@ mongoose
   .then(() => console.log("数据库连接成功..."))
   .catch(e => console.log(e.name + ": " + e.message));
 
+// 初始化passport
+app.use(passport.initialize());
+require("./configs/verifi")(passport);
+
 // 使用router中间件
 app.use("/api", apiRouter);
+app.use("/veri", userRouter);
 
 app.listen(55558, () => console.log("http://localhost:55558"));

@@ -81,7 +81,7 @@ module.exports = merge(common, {
       inject: "body"
     }),
     new HtmlWebpackPlugin({
-      filename: "personage.html",
+      filename: "views/personage.html",
       template: "./src/personage.html",
       inject: "body"
     }),

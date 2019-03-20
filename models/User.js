@@ -9,7 +9,11 @@ const mongoSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  personNum: {
+  identity: {
+    type: String,
+    required: false
+  },
+  name: {
     type: String,
     required: false
   }

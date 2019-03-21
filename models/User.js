@@ -9,13 +9,11 @@ const mongoSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  identity: {
-    type: String,
-    required: false
-  },
-  name: {
-    type: String,
-    required: false
+  identity: String,
+  name: String,
+  order: {
+    type: Array,
+    default: []
   }
 });
 

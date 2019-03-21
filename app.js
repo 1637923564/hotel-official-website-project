@@ -5,6 +5,7 @@ const passport = require("passport");
 
 const apiRouter = require("./routes/api"); //引入router
 const userRouter = require("./routes/user");
+const orderRouter = require("./routes/order");
 
 const app = express();
 
@@ -30,5 +31,6 @@ require("./configs/verifi")(passport);
 // 使用router中间件
 app.use("/api", apiRouter);
 app.use("/veri", userRouter);
+app.use("/order", orderRouter);
 
 app.listen(55558, () => console.log("http://localhost:55558"));

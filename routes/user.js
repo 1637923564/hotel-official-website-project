@@ -33,7 +33,9 @@ router.post("/register", (req, res) => {
           new User(registerMsg)
             .save()
             .then(data => {
-              console.log(data);
+              res.jsonp({
+                msg: "success"
+              })
             })
             .catch(err => {
               console.log(err.message);
@@ -83,7 +85,7 @@ router.post("/login", (req, res) => {
     })
 });
 
-// 个人信息接口
+// 用户信息接口
 router.get("/verifi", passport.authenticate("jwt", { session: false }), (req, res) => {
   // 防止用户的密码被返回到客户端
   let user = JSON.parse(JSON.stringify(req.user));
@@ -94,7 +96,20 @@ router.get("/verifi", passport.authenticate("jwt", { session: false }), (req, re
   });
 });
 
-// 修改个人信息前需要验证密码时请求的接口
+// 校验用户是否已注册
+router.post("/veri_user", (req, res) => {
+  User
+    .findOne({ phoneNum: req.body.phoneNum })
+    .then(data => {
+      data ? res.jsonp({ msg: true })
+           : res.jsonp({ msg: false })
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+});
+
+// 密码验证接口(已登录状态)
 router.post("/veri_pwd", passport.authenticate("jwt", { session: false }), (req, res) => {
   bcrypt
     .compare(req.body.password, req.user.password)
@@ -114,12 +129,11 @@ router.post("/change_pwd", passport.authenticate("jwt", { session: false }), (re
     .hash(req.body.password, 10)
     .then(function(hash) {
       req.user.password = hash;
-      res.json(req.user)
       new User(req.user)
         .save()
         .then(data => {
           res.jsonp({
-            msg: "success"
+            msg: "密码修改成功"
           });
         })
         .catch(err => console.log(err.message));

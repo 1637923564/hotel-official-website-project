@@ -7,3 +7,11 @@ module.exports.hotelConfig = (brandName, data) => {
   }
   return newData;
 }
+module.exports.orderConfig = (hotel, hotelArr) => {
+  let tarIndex = hotelArr.findIndex(item => {
+    return item.hotel === hotel;
+  });
+  hotelArr.splice(tarIndex, 1);
+  return tarIndex >= 0 ? hotelArr
+                       : tarIndex;
+}

@@ -18,7 +18,7 @@ const Brand = mongoose.model("brand");
 const City = mongoose.model("city");
 const Hotel = mongoose.model("hotel");
 
-// 获取各品牌数据
+// 品牌信息接口
 router.get("/brand", (req, res) => {
   Brand
     .find({})
@@ -27,7 +27,7 @@ router.get("/brand", (req, res) => {
     })
     .catch(e => console.log(e.message));
 });
-// 获取城市数据
+// 城市信息接口
 router.get("/city", (req, res) => {
   City
     .find({})
@@ -36,7 +36,7 @@ router.get("/city", (req, res) => {
     })
     .catch(e => console.log(e.message));
 });
-// 获取酒店数据
+// 酒店信息接口
 router.post("/hotel", (req, res) => {
   Hotel
     .find({})
@@ -51,6 +51,25 @@ router.post("/hotel", (req, res) => {
       }
     })
     .catch(e => console.log(e.message));
+});
+// 酒店查找接口(根据酒店名)
+router.get("/hotel/find", (req, res) => {
+  Hotel
+    .findOne({
+      hotelName: req.query.hotelName
+    })
+    .then(data => {
+      data ? res.jsonp(data)
+           : res.jsonp({
+             msg: "未能找该酒店"
+           });
+    })
+    .catch(err => {
+      console.log(err.message)
+      res.status(404).jsonp({
+        msg: "数据库加载出错"
+      })
+    })
 });
 
 

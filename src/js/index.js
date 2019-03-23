@@ -3,6 +3,7 @@ import Swiper from "../lib/swiper/swiper";
 import LoadTool from "./tools/LoadTool";
 import StyleTool from "./tools/StyleTool";
 import DataTool from "./tools/DataTool";
+import UserTool from "./tools/UserTool";
 
 import "amazeui";
 import "amazeui/dist/css/amazeui.css";
@@ -16,6 +17,7 @@ import "../lib/swiper/swiper.css";
 let loadTool = new LoadTool($);
 let styleTool = new StyleTool($);
 let dataTool = new DataTool($);
+let userTool = new UserTool($);
 
 loadTool.loader(".p-head", ".p-foot");
 styleTool.rollingTrigger("body>.home");
@@ -46,7 +48,11 @@ styleTool.showLogIn({
   phoneLog: ".log-nav>.lf",
   passwordLog: ".log-nav>.rt",
   phoneLogWrap: ".for-phone",
-  passwordLogWrap: ".for-password"
+  passwordLogWrap: ".for-password",
+  smsBtn: ".for-phone .cover",
+  phone: ".for-phone .phone",
+  veri: ".for-phone .veri",
+  userTool
 });
 
 dataTool.brandDataLoader({

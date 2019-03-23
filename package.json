@@ -43,6 +43,6 @@
     "start": "npx webpack-dev-server --config webpack.dev.js",
     "git": "git push origin master",
     "server": "nodemon app.js",
-    "db": "/home/laowang/tools/mongodb/bin/mongod --dbpath=/home/laowang/tools/mongodb/data --logpath /home/laowang/tools/mongodb/logs/log.log --logappend --port 27017"
+    "db": "/home/tools/mongodb/bin/mongod --dbpath=/home/tools/mongodb/data --logpath /home/tools/mongodb/logs/log.log --logappend --port 27017"
   }
 }

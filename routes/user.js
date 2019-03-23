@@ -49,6 +49,7 @@ router.post("/register", (req, res) => {
 });
 
 // 登录接口
+// 用验证码登录时，必须传递一个请求主体属性：veriSign
 router.post("/login", (req, res) => {
   let loginMsg = req.body;
   User
@@ -65,6 +66,9 @@ router.post("/login", (req, res) => {
         bcrypt.compare(loginMsg.password, data.password, function(err, isMatch) {
           let standard = err ? console.log(err.message)
               : isMatch;
+          if(!loginMsg.password && loginMsg.veriSign) {
+            standard = true
+          }
           if(standard) {
             // 生成并返回token
             jwt.sign({ id: data.id, phone: data.phoneNum }, keys.secretOrKey, {expiresIn: 36000}, (err, token) => {

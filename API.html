@@ -14,24 +14,24 @@
   <script>
     $(".click").click(function (e) {
       //#region 查询
-      // $.ajax({
-      //   type: 'post',
-      //   url: 'http://route.showapi.com/28-3',
-      //   dataType: 'json',
-      //   data: {
-      //     "showapi_appid": '86878', //这里需要改成自己的appid
-      //     "showapi_sign": '13a09830d1994f3babc20674d3e6502f', //这里需要改成自己的应用的密钥secret
-      //     "nomalTemplate": "2"
-      //   },
+      $.ajax({
+        type: 'post',
+        url: 'http://route.showapi.com/28-3',
+        dataType: 'json',
+        data: {
+          "showapi_appid": '86878', //这里需要改成自己的appid
+          "showapi_sign": '13a09830d1994f3babc20674d3e6502f', //这里需要改成自己的应用的密钥secret
+          "nomalTemplate": "2"
+        },
 
-      //   error: function (XmlHttpRequest, textStatus, errorThrown) {
-      //     alert("操作失败!");
-      //   },
-      //   success: function (result) {
-      //     console.log(result) //console变量在ie低版本下不能用
-      //     alert(result.showapi_res_code)
-      //   }
-      // });
+        error: function (XmlHttpRequest, textStatus, errorThrown) {
+          alert("操作失败!");
+        },
+        success: function (result) {
+          console.log(result) //console变量在ie低版本下不能用
+          alert(result.showapi_res_code)
+        }
+      });
       //#endregion
        
       //#region 修改

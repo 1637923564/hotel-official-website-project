@@ -223,6 +223,7 @@ function StyleTool($) {
     }
   }
   /**
+   * 时间选择器
    * @method dateSelect
    * @param {String} fromTar 日期选中输入框(起始日期)
    * @param {String} toTar 日期选择输入框(结束日期)
@@ -337,6 +338,10 @@ function StyleTool($) {
    * @param {String} params.passwordLog 密码登录按钮
    * @param {String} params.phoneLogWrap 使用手机登录时显示的表单
    * @param {String} params.passwordLogWrap 使用密码登录时现实的表单
+   * @param {String} params.smsBtn 验证码获取按钮
+   * @param {String} params.phone 手机号输入框
+   * @param {String} params.veri 验证码输入框 
+   * @param {Object} params.userTool 登录注册等功能的调用模块对象
    */
   this.showLogIn = function(params) {
     //#region 生成登录wrap
@@ -347,7 +352,7 @@ function StyleTool($) {
           <div class="rt">密码登录</div>
         </div>
         <form class="for-phone">
-          <input type="text" placeholder="请输入手机号码" class="phone">
+          <input type="text" placeholder="请输入手机号码" class="phone" value="13547271471">
           <input type="text" placeholder="请输入验证码" class="veri">
           <a href="JavaScript:" class="cover">获取验证码</a>
         </form>
@@ -361,8 +366,12 @@ function StyleTool($) {
     `;
     $("body").append(layerWrapStr);
     //#endregion
+    
+    // 实现手机登录与密码登录之间的切换
     if($(params.phoneLog) && $(params.passwordLog)) {
       $(params.logNav).on("click", "div", function(e) {
+        // 避免多次绑定
+        $("#layerLogWrap>.btn").unbind();
         $(this).siblings().removeClass("click-style");
         $(this).addClass("click-style");
         if($(this)[0] === $(params.phoneLog)[0]) {
@@ -372,6 +381,8 @@ function StyleTool($) {
           $(params.phoneLogWrap).css("display", "none");
           $(params.passwordLogWrap).css("display", "block");
         }
+        // 获取短信验证码
+        params.userTool.smsVeri(params.smsBtn, params.phone, params.veri);
       });
     }
     setTimeout(() => {

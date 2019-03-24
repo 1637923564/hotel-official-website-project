@@ -73,17 +73,21 @@ input {
       float: left;
       margin-right: 28px;
       &:last-child {
+        position: relative;
         margin-right: 0;
+        img {
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          right: 6px;
+          top: 50%;
+          margin-top: -8px;
+          display: none;
+        }
         .user-menu {
           a {
-            background: url(../image/down-arrow.png) no-repeat 35px -1px;
-            background-size: 40%;
             padding-right: 29px;
             display: none;
-            &:hover {
-              background: url(../image/up-arrow.png) no-repeat 35px -1px;
-              background-size: 40%;
-            }
           }
         }
         .un-log {

@@ -10,6 +10,28 @@ function StyleTool($) {
   }
   // #endregion
   /**
+   * 导航栏下拉菜单
+   * @method navDropArrow
+   * @param {String} userMenuBtn 导航栏中的下拉菜单触发按钮
+   */
+  this.navDropArrow = function(userMenuBtn) {
+    setTimeout(() => {
+      let $userMenuBtnWrap = $(userMenuBtn);
+      let $userMenuBtn = $(userMenuBtn).children("a");
+      if($userMenuBtn.css("display") !== "none") {
+        $userMenuBtnWrap.siblings(".down").css("display", "block");
+      }
+      $userMenuBtn.mouseover(function(e){
+        $userMenuBtnWrap.siblings(".down").css("display", "none");
+        $userMenuBtnWrap.siblings(".up").css("display", "block");
+      });
+      $userMenuBtn.mouseleave(function(e) {
+        $userMenuBtnWrap.siblings(".up").css("display", "none");
+        $userMenuBtnWrap.siblings(".down").css("display", "block");
+      })
+    });
+  }
+  /**
    * 首页滚动条触发导航栏透明效果
    * @method rollingTrigger
    * @param {String} page 需要使用该效果的界面节点

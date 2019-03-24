@@ -20,6 +20,7 @@ let dataTool = new DataTool($);
 let userTool = new UserTool($);
 
 loadTool.loader(".p-head", ".p-foot");
+styleTool.navDropArrow(".user-menu");
 styleTool.rollingTrigger("body>.home");
 styleTool.preventDisplayNone(".p-head .icon-phone", ".p-head .phone-number");
 styleTool.preventDisplayNone(".p-head .icon-contextphone", ".p-head .qr-code");
@@ -73,3 +74,5 @@ dataTool.searchCities({
   brand: ".my-form .hotel-select .brand-sel",
   showMap: styleTool.showMap
 });
+
+userTool.isLogIn();

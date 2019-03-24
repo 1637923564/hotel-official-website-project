@@ -14,6 +14,7 @@ const User = mongoose.model("user");
 // 注册接口
 router.post("/register", (req, res) => {
   let registerMsg = req.body;
+  registerMsg.name = registerMsg.phoneNum;
   User
     .findOne({
       phoneNum: registerMsg.phoneNum

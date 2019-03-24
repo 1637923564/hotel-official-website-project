@@ -21,7 +21,9 @@ function UserTool($) {
       // 点击按钮之后，按钮样式将会变成不可点击样式，并实现60s的倒计时
       let time = 60;
       $smsBtn.unbind();
-      $smsBtn.css("background", "#eee");
+      $smsBtn.css("background", "#ccc");
+      $smsBtn.text(time);
+      $smsBtn.css("cursor", "no-drop");
       let countdown = setInterval(() => {
         time --;
         $smsBtn.text(time);
@@ -49,7 +51,7 @@ function UserTool($) {
           setTimeout(() => {
             $("#layerLogWrap>.btn").css("cursor", "no-drop");
             $("#layerLogWrap>.btn").unbind();
-          }, 70000);
+          }, 180000);
           $("#layerLogWrap>.btn").click(function(e) {
             if($(phone).val() === phoneNum && parseInt($(veri).val()) === veriCode) {
               // 验证手机号是否已经注册
@@ -66,6 +68,7 @@ function UserTool($) {
                       data: { phoneNum, veriSign: true },
                       success: function(data) {
                         Cookies.set("Authorization", data.token, { expires: 7 });
+                        location.reload();
                       }
                     })
                   }else {
@@ -83,26 +86,57 @@ function UserTool($) {
                             data: { phoneNum, veriSign: true },
                             success: function(data) {
                               Cookies.set("Authorization", data.token, { expires: 7 });
+                              location.reload();
                             }
                           })
                         }
                       }
-                    })
+                    });
                   }
                 }
               });
             }
-          })
+          }) ;
         }
       });
       setTimeout(() => {
         clearInterval(countdown);
         $smsBtn.text("获取验证码");
-        $smsBtn.css("background", "rgb(231,208,115)")
+        $smsBtn.css("background", "rgb(231,208,115)");
+        $smsBtn.css("cursor", "pointer");
         $smsBtn.click(smsBtnCallback);
       }, 60000);
     }
     $smsBtn.click(smsBtnCallback);
+  }
+  /**
+   * 验证用户是否为登录状态
+   * @method isLogIn
+   * @param {String} userMenu 导航栏中的userMenu下拉菜单触发按钮
+   * @param {String} unLog 导航栏中的登录/注册按钮
+   */
+  this.isLogIn = function() {
+    let token = Cookies.get("Authorization");
+    if(token) {
+      $.ajax({
+        url: "/veri/verifi",
+        type: "GET",
+        headers: {
+          Authorization: token
+        },
+        success: function(data) {
+          // data = { msg: isSuccess, user: user info}
+          $(".nav-list .user-menu").children().text(data.user.name);
+          $(".nav-list .user-menu").children().css("display", "inline");
+          $(".nav-list .un-log").children().css("display", "none");
+        },
+        error: function(err) {
+          if(err.responseText === "Unauthorized") {
+            alert("非法的token，请重新登录");
+          }
+        }
+      });
+    }
   }
 }
 

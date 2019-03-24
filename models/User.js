@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const mongoSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
   phoneNum: {
     type: String,
     required: true

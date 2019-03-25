@@ -285,9 +285,9 @@ function StyleTool($) {
       function toTimeWrap() {
         let fromTarVal = $fromTar.val();
         if(fromTarVal) {
-          let fromTime = new Date(fromTarVal);
+          let fromTime = new Date(fromTarVal); // 入住时间对象
           let nowTime = new Date();
-          let timeDifference = fromTime - nowTime;
+          let timeDifference = fromTime - nowTime; // 获取两者毫秒差
           let tarTime = Math.ceil(timeDifference / 86400000);
           $toTar.datepicker({
             minDate: tarTime

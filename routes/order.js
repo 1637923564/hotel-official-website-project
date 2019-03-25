@@ -9,7 +9,7 @@ const User = mongoose.model("user");
 const router = express.Router();
 
 // 订单添加接口
-// { hotel, time, orderTime, bg, address }
+// { orderNum, type, hotel, time:入住时间, validityPeriod:有效期, orderTime:下单时间, bg, address, money }
 router.post("/add", passport.authenticate("jwt", { session: false }), (req, res) => {
   let orderArr = req.user.order;
   let len = orderArr.length;

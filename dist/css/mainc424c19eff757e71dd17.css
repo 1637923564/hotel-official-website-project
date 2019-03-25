@@ -14069,6 +14069,71 @@ tbody.am-collapse.am-in {
     background-color: #fff;
     color: #E6CD6A; }
 
+.personage .p-content {
+  display: flex;
+  min-height: 517px;
+  margin: 0 auto;
+  margin-top: 66px;
+  width: 1182px;
+  padding-top: 35px; }
+  .personage .p-content .nav {
+    flex: 1;
+    padding-top: 65px; }
+    .personage .p-content .nav .order, .personage .p-content .nav .user-info {
+      cursor: pointer;
+      text-align: center;
+      border-left: 2px solid #e7d073;
+      height: 15px;
+      line-height: 15px; }
+    .personage .p-content .nav .order {
+      margin-top: 30px; }
+  .personage .p-content .con {
+    flex: 5;
+    margin-left: 23px; }
+    .personage .p-content .con .order {
+      border: 1px solid #E6E6E6; }
+      .personage .p-content .con .order .top {
+        background-color: #F6F6F6;
+        padding-left: 24px;
+        height: 44px;
+        line-height: 44px; }
+        .personage .p-content .con .order .top .order-time {
+          margin-left: 60px; }
+      .personage .p-content .con .order .bottom {
+        display: flex;
+        padding: 0 42px 0 0;
+        line-height: 33px; }
+        .personage .p-content .con .order .bottom .img {
+          display: inline-block; }
+          .personage .p-content .con .order .bottom .img img {
+            display: inline-block;
+            width: 155px;
+            height: 155px; }
+        .personage .p-content .con .order .bottom .info {
+          display: inline-block;
+          width: 727px;
+          margin-left: 39px; }
+          .personage .p-content .con .order .bottom .info .one {
+            margin-top: 26px; }
+            .personage .p-content .con .order .bottom .info .one .hotel {
+              font-size: 16px; }
+            .personage .p-content .con .order .bottom .info .one .type {
+              margin: 0 17px; }
+            .personage .p-content .con .order .bottom .info .one .money {
+              float: right; }
+          .personage .p-content .con .order .bottom .info .two .validityPeriod {
+            margin-right: 17px; }
+          .personage .p-content .con .order .bottom .info .three {
+            float: right;
+            margin-right: 3px; }
+            .personage .p-content .con .order .bottom .info .three a {
+              display: inline-block;
+              height: 30px;
+              line-height: 30px;
+              background-color: #000;
+              padding: 0 26px;
+              color: #fff; }
+
 html {
   height: 100%; }
   html body {

@@ -9,28 +9,35 @@ const User = mongoose.model("user");
 const router = express.Router();
 
 // 订单添加接口
-// { orderNum, type, hotel, time:入住时间, validityPeriod:有效期, orderTime:下单时间, bg, address, money }
+// { orderNum, type, hotel, time:入住天数, validityPeriod:有效期, orderTime:下单时间, bg, address, money }
 router.post("/add", passport.authenticate("jwt", { session: false }), (req, res) => {
   let orderArr = req.user.order;
   let len = orderArr.length;
   let sign = true;
-  orderArr.forEach((item, index) => {
-    if(item.hotel === req.body.hotel) {
-      sign = false;
-      res.jsonp({ msg: "该订单已存在" });
-    }else if(index === len - 1 && sign){
-      req.user.order.push(req.body);
-      new User(req.user)
-        .save()
-        .then(data => {
-          res.jsonp({ msg: "success" });
-        })
-        .catch(err => {
-          console.log(err.message);
-          res.status(404).jsonp({ msg: "数据存储失败" });
-        });
-    }
-  });
+  if(len === 0) {
+    pushData();
+  }else {
+    orderArr.forEach((item, index) => {
+      if(item.hotel === req.body.hotel) {
+        sign = false;
+        res.jsonp({ msg: "该订单已存在" });
+      }else if(index === len - 1 && sign){
+        pushData();
+      }
+    });
+  }
+  function pushData() {
+    req.user.order.push(req.body);
+    new User(req.user)
+      .save()
+      .then(data => {
+        res.jsonp({ msg: "success" });
+      })
+      .catch(err => {
+        console.log(err.message);
+        res.status(404).jsonp({ msg: "数据存储失败" });
+      });
+  }
 });
 
 // 订单删除接口

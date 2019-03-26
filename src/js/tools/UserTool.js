@@ -138,6 +138,63 @@ function UserTool($) {
       });
     }
   }
+  /**
+   * 个人主页订单加载及生成
+   * @method orderLoader
+   * @param {String} page 需要订单数据的界面
+   */
+  this.orderLoader = function(page) {
+    if($(page).length > 0) {
+      $.ajax({
+        type: "GET",
+        url: "/veri/verifi",
+        headers: {
+          Authorization: Cookies.get("Authorization")
+        },
+        success: function(data) {
+          let order = data.user.order;
+          let elStr = "";
+          if(order.length === 0) {
+            elStr = "暂时没有订单";
+          }else {
+            order.forEach(item => {
+              elStr += `
+                <div class="order">
+                  <div class="top">
+                    <span class="order-num">订单号：${item.orderNum}</span>
+                    <span class="order-time">下单时间：${item.orderTime}</span>
+                  </div>
+                  <div class="bottom">
+                    <div class="img">
+                      <img src="${item.bg}" address="${item.address}" tit="${item.hotel}">
+                    </div>
+                    <div class="info">
+                      <div class="one">
+                        <span class="hotel">${item.hotel}</span>
+                        <span class="type">${item.type}</span>
+                        <span class="money">订单金额：${item.money}</span>
+                      </div>
+                      <div class="two">
+                        <span class="validityPeriod">${item.validityPeriod}</span>
+                        <span class="time">${item.time}晚</span>
+                      </div>
+                      <div class="three">
+                        <a href="javascript:">取消订单</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            });
+          }
+          $(".order-list").html(elStr);
+        },
+        error: function(err) {
+          console.log(err.message)
+        }
+      })
+    }
+  }
 }
 
 export default UserTool;

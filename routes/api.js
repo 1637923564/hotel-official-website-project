@@ -53,7 +53,7 @@ router.post("/hotel", (req, res) => {
     .catch(e => console.log(e.message));
 });
 // 酒店查找接口(根据酒店名)
-router.get("/hotel/find", (req, res) => {
+router.get("/find", (req, res) => {
   Hotel
     .findOne({
       hotelName: req.query.hotelName

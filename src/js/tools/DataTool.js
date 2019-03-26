@@ -1,3 +1,5 @@
+import UserTool from "../tools/UserTool";
+let userTool = new UserTool($);
 /**
  * 后台数据加载及处理
  * @module DataTool
@@ -147,7 +149,7 @@ function DataTool($) {
                   <b>${dataObj.comment}条评论</b>
                   <span>${dataObj.grade}</span>
                 </div>
-                <a href="#" class="btn">立即预定</a>
+                <a href="javascript:" class="btn add-order" hotelName="${dataObj.hotelName}">立即预定</a>
               </div>
             </li>
           `
@@ -157,6 +159,7 @@ function DataTool($) {
       setTimeout(() => {
         params.showMap(".showMapClick");
       });
+      userTool.addOrder(".add-order");
     }else {
       $.ajax({
         type: "POST",
@@ -237,7 +240,7 @@ function DataTool($) {
                       <b>${dataObj.comment}条评论</b>
                       <span>${dataObj.grade}</span>
                     </div>
-                    <a href="#" class="btn">立即预定</a>
+                    <a href="javascript:" class="btn add-order" hotelName="${dataObj.hotelName}">立即预定</a>
                   </div>
                 </li>
               `
@@ -247,6 +250,7 @@ function DataTool($) {
           setTimeout(() => {
             params.showMap(".showMapClick")
           });
+          userTool.addOrder(".add-order");
         }
       })
     }
@@ -419,7 +423,7 @@ function DataTool($) {
                         break;
                     }
                   }
-                  // console.log(newData)
+                  
                   // 实现筛选机制
                   for(var i = 0, len = newData.length; i < len; i ++) {
                     // 满足条件：筛选数组(comDisArr等)为空或者被筛选者(酒店)属于筛选数组时，该条数据通过筛选

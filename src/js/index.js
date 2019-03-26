@@ -76,4 +76,4 @@ dataTool.searchCities({
 });
 
 userTool.isLogIn();
-userTool.orderLoader(".personage");
+userTool.orderLoader(".personage", ".three>a");

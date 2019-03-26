@@ -14090,43 +14090,44 @@ tbody.am-collapse.am-in {
   .personage .p-content .con {
     flex: 5;
     margin-left: 23px; }
-    .personage .p-content .con .order {
-      border: 1px solid #E6E6E6; }
-      .personage .p-content .con .order .top {
+    .personage .p-content .con .order-list .order {
+      border: 1px solid #E6E6E6;
+      margin-top: 7px; }
+      .personage .p-content .con .order-list .order .top {
         background-color: #F6F6F6;
         padding-left: 24px;
         height: 44px;
         line-height: 44px; }
-        .personage .p-content .con .order .top .order-time {
+        .personage .p-content .con .order-list .order .top .order-time {
           margin-left: 60px; }
-      .personage .p-content .con .order .bottom {
+      .personage .p-content .con .order-list .order .bottom {
         display: flex;
         padding: 0 42px 0 0;
         line-height: 33px; }
-        .personage .p-content .con .order .bottom .img {
+        .personage .p-content .con .order-list .order .bottom .img {
           display: inline-block; }
-          .personage .p-content .con .order .bottom .img img {
+          .personage .p-content .con .order-list .order .bottom .img img {
             display: inline-block;
             width: 155px;
             height: 155px; }
-        .personage .p-content .con .order .bottom .info {
+        .personage .p-content .con .order-list .order .bottom .info {
           display: inline-block;
           width: 727px;
           margin-left: 39px; }
-          .personage .p-content .con .order .bottom .info .one {
+          .personage .p-content .con .order-list .order .bottom .info .one {
             margin-top: 26px; }
-            .personage .p-content .con .order .bottom .info .one .hotel {
+            .personage .p-content .con .order-list .order .bottom .info .one .hotel {
               font-size: 16px; }
-            .personage .p-content .con .order .bottom .info .one .type {
+            .personage .p-content .con .order-list .order .bottom .info .one .type {
               margin: 0 17px; }
-            .personage .p-content .con .order .bottom .info .one .money {
+            .personage .p-content .con .order-list .order .bottom .info .one .money {
               float: right; }
-          .personage .p-content .con .order .bottom .info .two .validityPeriod {
+          .personage .p-content .con .order-list .order .bottom .info .two .validityPeriod {
             margin-right: 17px; }
-          .personage .p-content .con .order .bottom .info .three {
+          .personage .p-content .con .order-list .order .bottom .info .three {
             float: right;
             margin-right: 3px; }
-            .personage .p-content .con .order .bottom .info .three a {
+            .personage .p-content .con .order-list .order .bottom .info .three a {
               display: inline-block;
               height: 30px;
               line-height: 30px;

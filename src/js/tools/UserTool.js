@@ -142,8 +142,9 @@ function UserTool($) {
    * 个人主页订单加载及生成
    * @method orderLoader
    * @param {String} page 需要订单数据的界面
+   * @param {String} cancelBtn 取消订单按钮
    */
-  this.orderLoader = function(page) {
+  this.orderLoader = function(page, cancelBtn) {
     if($(page).length > 0) {
       $.ajax({
         type: "GET",
@@ -179,7 +180,7 @@ function UserTool($) {
                         <span class="time">${item.time}晚</span>
                       </div>
                       <div class="three">
-                        <a href="javascript:">取消订单</a>
+                        <a href="javascript:" hotel="${item.hotel}">取消订单</a>
                       </div>
                     </div>
                   </div>
@@ -188,11 +189,34 @@ function UserTool($) {
             });
           }
           $(".order-list").html(elStr);
+          
+          $(cancelBtn).click(function(e) {
+            let hotel = $(this).attr("hotel");
+            $.ajax({
+              url: "/order/del?hotel=" + hotel,
+              type: "GET",
+              headers: {
+                Authorization: Cookies.get("Authorization")
+              },
+              success: function(data) {
+                location.reload();
+              }
+            })
+          });
         },
         error: function(err) {
           console.log(err.message)
         }
-      })
+      });
+    }
+  }
+  /**
+   * 订单添加
+   * @method addOrder
+   */
+  this.addOrder = function(btn) {
+    window.onload = function(e) {
+      console.log($(btn));
     }
   }
 }

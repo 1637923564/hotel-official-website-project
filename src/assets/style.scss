@@ -462,60 +462,63 @@ $iconColor: rgb(254, 129, 9);
     .con {
       flex: 5;
       margin-left: 23px;
-      .order {
-        border: 1px solid #E6E6E6;
-        .top {
-          background-color: #F6F6F6;
-          padding-left: 24px;
-          height: 44px;
-          line-height: 44px;
-          .order-time {
-            margin-left: 60px;
+      .order-list {
+        .order {
+          border: 1px solid #E6E6E6;
+          margin-top: 7px;
+          .top {
+            background-color: #F6F6F6;
+            padding-left: 24px;
+            height: 44px;
+            line-height: 44px;
+            .order-time {
+              margin-left: 60px;
+            }
           }
-        }
-        .bottom {
-          display: flex;
-          padding: 0 42px 0 0;
-          line-height: 33px;
-          .img {
-            display: inline-block;
-            img {
+          .bottom {
+            display: flex;
+            padding: 0 42px 0 0;
+            line-height: 33px;
+            .img {
               display: inline-block;
-              width: 155px;
-              height: 155px;
-            }
-          }
-          .info {
-            display: inline-block;
-            width: 727px;
-            margin-left: 39px;
-            .one {
-              margin-top: 26px;
-              .hotel {
-                font-size: 16px;
-              }
-              .type {
-                margin: 0 17px;
-              }
-              .money {
-                float: right;
-              }
-            }
-            .two {
-              .validityPeriod {
-                margin-right: 17px;
-              }
-            }
-            .three {
-              float: right;
-              margin-right: 3px;
-              a {
+              img {
                 display: inline-block;
-                height: 30px;
-                line-height: 30px;
-                background-color: #000;
-                padding: 0 26px;
-                color: #fff;
+                width: 155px;
+                height: 155px;
+              }
+            }
+            .info {
+              display: inline-block;
+              width: 727px;
+              margin-left: 39px;
+              .one {
+                margin-top: 26px;
+                .hotel {
+                  font-size: 16px;
+                }
+                .type {
+                  margin: 0 17px;
+                }
+                .money {
+                  float: right;
+                }
+              }
+              .two {
+                .validityPeriod {
+                  margin-right: 17px;
+                }
+              }
+              .three {
+                float: right;
+                margin-right: 3px;
+                a {
+                  display: inline-block;
+                  height: 30px;
+                  line-height: 30px;
+                  background-color: #000;
+                  padding: 0 26px;
+                  color: #fff;
+                }
               }
             }
           }

@@ -59,9 +59,10 @@ router.get("/find", (req, res) => {
       hotelName: req.query.hotelName
     })
     .then(data => {
-      data ? res.jsonp(data)
+      data ? res.jsonp({ msg: true, hotel: data })
            : res.jsonp({
-             msg: "未能找该酒店"
+             msg: false,
+             prompt: "未能找到该酒店"
            });
     })
     .catch(err => {

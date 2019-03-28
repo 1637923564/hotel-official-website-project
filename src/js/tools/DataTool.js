@@ -1,3 +1,4 @@
+import $ from "jquery";
 import UserTool from "../tools/UserTool";
 let userTool = new UserTool($);
 /**
@@ -23,6 +24,7 @@ function DataTool($) {
    */
   this.brandDataLoader = function (params) {
     if ($(params.page).length > 0) {
+      let loadAm = layer.load();
       let that = this;
       $.ajax({
         type: "GET",
@@ -38,7 +40,8 @@ function DataTool($) {
             // 调用本模块的hotelLoader方法
             that.hotelLoader({
               brandName: brandName,
-              showMap: params.showMap
+              showMap: params.showMap,
+              loadAm: loadAm
             });
             // 点击按钮实现变化
             $clickSwiperSlide.parent(".swiper-slide").siblings(".swiper-slide").children("a").removeClass("click-style");
@@ -155,9 +158,10 @@ function DataTool($) {
           `
         }
       }
-      $(".search .hotel-list>.hotel").html(elStr)
+      $(".search .hotel-list>.hotel").html(elStr);
       setTimeout(() => {
         params.showMap(".showMapClick");
+        layer.close(params.loadAm);
       });
       userTool.addOrder(".add-order");
     }else {
@@ -246,9 +250,10 @@ function DataTool($) {
               `
             }
           }
-          $(".list .hotel-list>.hotel").html(elStr)
+          $(".list .hotel-list>.hotel").html(elStr);
           setTimeout(() => {
-            params.showMap(".showMapClick")
+            params.showMap(".showMapClick");
+            layer.close(params.loadAm);
           });
           userTool.addOrder(".add-order");
         }
@@ -327,6 +332,7 @@ function DataTool($) {
    */
   this.searchCities = function (params) {
     if ($(params.page).length > 0) {
+      let loadAm = layer.load();
       let that = this;
       $.ajax({
         type: "GET",
@@ -397,7 +403,8 @@ function DataTool($) {
                 }
                 that.hotelLoader({
                   data: newData,
-                  showMap: params.showMap
+                  showMap: params.showMap,
+                  loadAm
                 });
                 
                 $(".my-form input").on("click", function(e) {
@@ -447,7 +454,8 @@ function DataTool($) {
                   }
                   that.hotelLoader({
                     data: newData2,
-                    showMap: params.showMap
+                    showMap: params.showMap,
+                    loadAm
                   });
                 })
               })

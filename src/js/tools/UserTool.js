@@ -132,7 +132,7 @@ function UserTool($) {
         },
         error: function(err) {
           if(err.responseText === "Unauthorized") {
-            alert("非法的token，请重新登录");
+            console.log("Unauthorized")
           }
         }
       });
@@ -215,8 +215,45 @@ function UserTool($) {
    * @method addOrder
    */
   this.addOrder = function(btn) {
-    window.onload = function(e) {
-      console.log($(btn));
+    if($(btn).length > 0) {
+      $(btn).click(function(e) {
+        let tar = this;
+        // 先判断是否为登录状态
+        $.ajax({
+          url: "/veri/verifi",
+          type: "GET",
+          headers: {
+            Authorization: Cookies.get("Authorization")
+          },
+          success: function(data) {
+            if(data.msg === "success") {
+              let hotel = $(tar).attr("hotelName");
+              $.ajax({
+                type: "GET",
+                url: "/api/find?hotelName=" + hotel,
+                success: function(data) {
+                  if(data.msg) {
+                    let getHotel = data.hotel;
+                    let loadAm = layer.load();
+                    setTimeout(() => {
+                      layer.close(loadAm)
+                      layer.msg('预定成功');
+                    }, 1000);
+                    // { orderNum, type, hotel, time:入住天数, validityPeriod:有效期, orderTime:下单时间, bg, address, money }
+                    
+                  }
+                }
+              })
+            }
+          },
+          error: function(err) {
+            if(err.responseText === "Unauthorized") {
+              // 未登录，弹出登录框
+              $(".un-log>a").click();
+            }
+          }
+        });
+      });
     }
   }
 }

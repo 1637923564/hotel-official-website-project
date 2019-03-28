@@ -20,7 +20,7 @@ router.post("/add", passport.authenticate("jwt", { session: false }), (req, res)
     orderArr.forEach((item, index) => {
       if(item.hotel === req.body.hotel) {
         sign = false;
-        res.jsonp({ msg: "该订单已存在" });
+        res.jsonp({ msg: false, prompt: "操作失败！您已经预定该酒店" });
       }else if(index === len - 1 && sign){
         pushData();
       }
@@ -31,7 +31,7 @@ router.post("/add", passport.authenticate("jwt", { session: false }), (req, res)
     new User(req.user)
       .save()
       .then(data => {
-        res.jsonp({ msg: "success" });
+        res.jsonp({ msg: true });
       })
       .catch(err => {
         console.log(err.message);

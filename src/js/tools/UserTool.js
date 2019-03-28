@@ -18,6 +18,7 @@ function UserTool($) {
   this.smsVeri = function (smsBtn, phone, veri) {
     let $smsBtn = $(smsBtn);
     function smsBtnCallback(e) {
+      let loadAm1 = layer.load();
       // 点击按钮之后，按钮样式将会变成不可点击样式，并实现60s的倒计时
       let time = 60;
       $smsBtn.unbind();
@@ -47,6 +48,9 @@ function UserTool($) {
           alert("服务器繁忙，请稍后再重试!");
         },
         success: function (result) {
+          setTimeout(() => {
+            layer.close(loadAm1);
+          }, 500);
           $("#layerLogWrap>.btn").css("cursor", "pointer");
           setTimeout(() => {
             $("#layerLogWrap>.btn").css("cursor", "no-drop");
@@ -54,6 +58,7 @@ function UserTool($) {
           }, 180000);
           $("#layerLogWrap>.btn").click(function(e) {
             if($(phone).val() === phoneNum && parseInt($(veri).val()) === veriCode) {
+              let loadAm2 = layer.load();
               // 验证手机号是否已经注册
               $.ajax({
                 type: "POST",
@@ -67,8 +72,11 @@ function UserTool($) {
                       url: "/veri/login",
                       data: { phoneNum, veriSign: true },
                       success: function(data) {
-                        Cookies.set("Authorization", data.token, { expires: 7 });
-                        location.reload();
+                        setTimeout(() => {
+                          layer.close(loadAm2);
+                          Cookies.set("Authorization", data.token, { expires: 7 });
+                          location.reload();
+                        }, 500);
                       }
                     })
                   }else {
@@ -85,8 +93,11 @@ function UserTool($) {
                             url: "/veri/login",
                             data: { phoneNum, veriSign: true },
                             success: function(data) {
-                              Cookies.set("Authorization", data.token, { expires: 7 });
-                              location.reload();
+                              setTimeout(() => {
+                                layer.close(loadAm2);
+                                Cookies.set("Authorization", data.token, { expires: 7 });
+                                location.reload();
+                              }, 500);
                             }
                           })
                         }
@@ -235,11 +246,54 @@ function UserTool($) {
                   if(data.msg) {
                     let getHotel = data.hotel;
                     let loadAm = layer.load();
-                    setTimeout(() => {
-                      layer.close(loadAm)
-                      layer.msg('预定成功');
-                    }, 1000);
+                    // 生成区间 [10000000000000 ,99999999999999]的数，使其作为订单号
+                    let orderNum = parseInt(Math.random() * (99999999999999 - 10000000000000 + 1)) + 10000000000000;
                     // { orderNum, type, hotel, time:入住天数, validityPeriod:有效期, orderTime:下单时间, bg, address, money }
+                    // 获取当前时间
+                    let nowTime = new Date();
+                    let year = nowTime.getFullYear(),
+                        month = nowTime.getMonth().toString(),
+                        day = nowTime.getDate(),
+                        h = nowTime.getHours().toString(),
+                        m = nowTime.getMinutes().toString(),
+                        s = nowTime.getSeconds().toString();
+                    let orderTime = year + "-" + (month.length>1 ? month : (0 + month)) + "-" + day + " " + (h.length>1 ? h : (0 + h)) + ":" + (m.length>1 ? m : (0 + m)) + ":" + (s.length>1 ? s : (0 + s));
+                    // 拿取本地localStorage的住房时间并转换成时间对象
+                    let localData = JSON.parse(localStorage.getItem("Norm_find_business"));
+                    let time = Math.ceil((new Date(localData["to-date"]) - new Date(localData["from-date"])) / 86400000);
+                    let addData = {
+                      orderNum,
+                      type: getHotel.type,
+                      hotel: getHotel.hotelName,
+                      time,
+                      validityPeriod: localData["from-date"] + " ~ " + localData["to-date"],
+                      orderTime,
+                      bg: getHotel.hotelBg,
+                      address: getHotel.address,
+                      money: 750
+                    };
+                    $.ajax({
+                      type: "POST",
+                      url: "/order/add",
+                      data: addData,
+                      headers: {
+                        Authorization: Cookies.get("Authorization")
+                      },
+                      success: function(data) {
+                        if(data.msg) {
+                          // 此处调用短信API +++++++++++
+                          setTimeout(() => {
+                            layer.close(loadAm);
+                            layer.msg('预定成功');
+                          }, 1000);
+                        }else {
+                          setTimeout(() => {
+                            layer.close(loadAm);
+                            layer.msg(data.prompt);
+                          }, 1000);
+                        }
+                      }
+                    });
                     
                   }
                 }

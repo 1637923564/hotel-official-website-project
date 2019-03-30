@@ -57,7 +57,7 @@ function UserTool($) {
             $("#layerLogWrap>.btn").unbind();
           }, 180000);
           $("#layerLogWrap>.btn").click(function(e) {
-            if($(phone).val() === phoneNum && parseInt($(veri).val()) === veriCode) {
+            if($(phone).val() === phoneNum && Number($(veri).val()) === veriCode) {
               let loadAm2 = layer.load();
               // 验证手机号是否已经注册
               $.ajax({
@@ -74,7 +74,7 @@ function UserTool($) {
                       success: function(data) {
                         setTimeout(() => {
                           layer.close(loadAm2);
-                          Cookies.set("Authorization", data.token, { expires: 7 });
+                          Cookies.set("Authorization", data.token);
                           location.reload();
                         }, 500);
                       }
@@ -95,7 +95,7 @@ function UserTool($) {
                             success: function(data) {
                               setTimeout(() => {
                                 layer.close(loadAm2);
-                                Cookies.set("Authorization", data.token, { expires: 7 });
+                                Cookies.set("Authorization", data.token);
                                 location.reload();
                               }, 500);
                             }
@@ -106,6 +106,8 @@ function UserTool($) {
                   }
                 }
               });
+            }else {
+              layer.msg("请输入正确的验证码");
             }
           }) ;
         }
@@ -137,16 +139,23 @@ function UserTool($) {
         },
         success: function(data) {
           // data = { msg: isSuccess, user: user info}
-          $(".nav-list .user-menu").children().text(data.user.name);
-          $(".nav-list .user-menu").children().css("display", "inline");
+          $(".nav-list .user-menu").children("a").text(data.user.name);
+          $(".nav-list .user-menu").children("a").css("display", "inline");
           $(".nav-list .un-log").children().css("display", "none");
         },
         error: function(err) {
           if(err.responseText === "Unauthorized") {
-            console.log("Unauthorized")
+            console.log("Unauthorized");
+            if($(".personage").length > 0) {
+              $(".personage").html(""); // 如果不是登录状态，先将界面清空
+              history.back();
+            }
           }
         }
       });
+    }else if(!token && $(".personage").length > 0) {
+      $(".personage").html(""); // 如果不是登录状态，先将界面清空
+      history.back();
     }
   }
   /**

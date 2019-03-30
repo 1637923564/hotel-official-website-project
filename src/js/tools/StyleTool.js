@@ -17,6 +17,7 @@ function StyleTool($) {
   this.navDropArrow = function(userMenuBtn) {
     setTimeout(() => {
       let $userMenuBtnWrap = $(userMenuBtn);
+      let $userMenuWrap = $userMenuBtnWrap.children(".cover");
       let $userMenuBtn = $(userMenuBtn).children("a");
       if($userMenuBtn.css("display") !== "none") {
         $userMenuBtnWrap.siblings(".down").css("display", "block");
@@ -24,10 +25,22 @@ function StyleTool($) {
       $userMenuBtn.mouseover(function(e){
         $userMenuBtnWrap.siblings(".down").css("display", "none");
         $userMenuBtnWrap.siblings(".up").css("display", "block");
+        $userMenuWrap.fadeIn();
       });
       $userMenuBtn.mouseleave(function(e) {
         $userMenuBtnWrap.siblings(".up").css("display", "none");
         $userMenuBtnWrap.siblings(".down").css("display", "block");
+        $userMenuWrap.fadeOut();
+      });
+      $userMenuWrap.mouseover(function(e) {
+        $userMenuBtnWrap.siblings(".down").css("display", "none");
+        $userMenuBtnWrap.siblings(".up").css("display", "block");
+        $userMenuWrap.stop();
+      });
+      $userMenuWrap.mouseleave(function(e) {
+        $userMenuBtnWrap.siblings(".up").css("display", "none");
+        $userMenuBtnWrap.siblings(".down").css("display", "block");
+        $userMenuWrap.fadeOut();
       })
     });
   }

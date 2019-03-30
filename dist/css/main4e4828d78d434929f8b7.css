@@ -14195,13 +14195,13 @@ input {
     position: relative;
     top: -12px;
     float: right; }
-    .p-head .nav-list li {
+    .p-head .nav-list > li {
       float: left;
       margin-right: 28px; }
-      .p-head .nav-list li:last-child {
+      .p-head .nav-list > li:last-child {
         position: relative;
         margin-right: 0; }
-        .p-head .nav-list li:last-child img {
+        .p-head .nav-list > li:last-child img {
           position: absolute;
           width: 16px;
           height: 16px;
@@ -14209,13 +14209,59 @@ input {
           top: 50%;
           margin-top: -8px;
           display: none; }
-        .p-head .nav-list li:last-child .user-menu a {
-          padding-right: 29px;
-          display: none; }
-        .p-head .nav-list li:last-child .un-log {
+        .p-head .nav-list > li:last-child .user-menu {
+          position: relative; }
+          .p-head .nav-list > li:last-child .user-menu > a {
+            padding-right: 29px;
+            display: none; }
+          .p-head .nav-list > li:last-child .user-menu div.cover {
+            position: absolute;
+            padding-top: 25px;
+            left: -44px;
+            top: 64%;
+            display: none; }
+            .p-head .nav-list > li:last-child .user-menu div.cover .user-menu-list {
+              position: relative;
+              font-size: 12px;
+              background-color: #fff;
+              padding: 0 10px;
+              border-radius: 4px;
+              box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1), -1px -1px 10px rgba(0, 0, 0, 0.1); }
+              .p-head .nav-list > li:last-child .user-menu div.cover .user-menu-list::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                border: 8px solid;
+                border-color: transparent transparent #eee transparent;
+                top: -16px;
+                left: 71px; }
+              .p-head .nav-list > li:last-child .user-menu div.cover .user-menu-list::after {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                border: 8px solid;
+                border-color: transparent transparent #fff transparent;
+                top: -15px;
+                left: 71px; }
+              .p-head .nav-list > li:last-child .user-menu div.cover .user-menu-list li {
+                margin: 0;
+                height: 40px;
+                line-height: 40px;
+                border-bottom: 1px solid #e6e6e6;
+                text-align: center; }
+                .p-head .nav-list > li:last-child .user-menu div.cover .user-menu-list li:last-child {
+                  border-bottom-width: 0; }
+                .p-head .nav-list > li:last-child .user-menu div.cover .user-menu-list li a {
+                  display: inline-block;
+                  color: #000;
+                  width: 139px;
+                  height: 37px; }
+                  .p-head .nav-list > li:last-child .user-menu div.cover .user-menu-list li a:hover {
+                    color: #e7d073; }
+        .p-head .nav-list > li:last-child .un-log {
           background-size: 40%;
           padding-right: 29px; }
-      .p-head .nav-list li a {
+      .p-head .nav-list > li a {
         color: #fff; }
     .p-head .nav-list .contact .phone {
       position: absolute;
